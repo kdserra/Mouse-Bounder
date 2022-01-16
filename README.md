@@ -1,9 +1,11 @@
 # Mouse Bounder
 
-Restrict the mouse to the bounds of a Windows application.
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/kdserra/Mouse-Bounder/main/Preview/app.png"/>
+</p>
+
+<p align="center">
+  Restrict the mouse to the bounds of a Windows application.
 </p>
 
 # Usage
