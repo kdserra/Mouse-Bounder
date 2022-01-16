@@ -92,7 +92,7 @@ namespace Mouse_Bounder
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 15);
             this.label1.TabIndex = 6;
-            this.label1.Text = "v1.0.0";
+            this.label1.Text = "v1.0.1";
             // 
             // MainForm
             // 
@@ -105,7 +105,10 @@ namespace Mouse_Bounder
             this.Controls.Add(this.boundBtn);
             this.Controls.Add(this.processComboBox);
             this.Controls.Add(this.processListLbl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "Mouse Bounder";
             this.ResumeLayout(false);
