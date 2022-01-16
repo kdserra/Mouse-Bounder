@@ -12,6 +12,7 @@ namespace Mouse_Bounder
         // When bounded to an application, the cursor can leave the window bounds by a slight amount.
         // To fix this, we push the cursor back to the boundary + the boundary offset.
         const int WINDOW_BOUNDARY_OFFSET = 10;
+
         public struct POINT
         {
             public int X;
@@ -39,11 +40,9 @@ namespace Mouse_Bounder
         [DllImport("user32.dll")]
         public static extern bool GetWindowRect(IntPtr hwnd, ref Rect rectangle);
 
-
         private bool m_isMouseBounded = false;
         private Process m_boundProcess;
         private Thread m_mouseBounderThread;
-
         private bool IsProcessActive(Process process)
         {
             if (process == null) { return false; }
@@ -129,7 +128,6 @@ namespace Mouse_Bounder
             }
             return null;
         }
-
         private void ResetFields()
         {
             this.m_isMouseBounded = false;
@@ -147,12 +145,10 @@ namespace Mouse_Bounder
             this.m_mouseBounderThread = new Thread(new ThreadStart(this.RestrictMouseMovement));
             this.m_mouseBounderThread.Start();
         }
-
         private void unboundBtn_Click(object sender, EventArgs e)
         {
             this.ResetFields();
         }
-
         private void refreshBtn_Click(object sender, EventArgs e)
         {
             UpdateProcessListComboBox(ref processComboBox);
