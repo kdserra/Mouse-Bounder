@@ -12,7 +12,6 @@ namespace Mouse_Bounder
         // When bounded to an application, the cursor can leave the window bounds by a slight amount.
         // To fix this, we push the cursor back to the boundary + the boundary offset.
         const int WINDOW_BOUNDARY_OFFSET = 10;
-
         public struct POINT
         {
             public int X;
@@ -45,9 +44,31 @@ namespace Mouse_Bounder
         private Process m_boundProcess;
         private Thread m_mouseBounderThread;
 
+        private bool IsProcessActive(Process process)
+        {
+            if (process == null) { return false; }
+            Process[] processes = Process.GetProcesses();
+            foreach (Process proc in processes)
+            {
+                if (proc.Id == process.Id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool ShouldResrictMouse()
+        {
+            return (
+                this.m_isMouseBounded &&
+                this.IsProcessActive(this.m_boundProcess)
+            );
+        }
+
         private void RestrictMouseMovement()
         {
-            while (this.m_isMouseBounded)
+            while (this.ShouldResrictMouse())
             {
                 Rect? windowRectUnsafe = GetWindowRect(ref this.m_boundProcess) ;
                 if (windowRectUnsafe == null) { continue; }
@@ -88,8 +109,8 @@ namespace Mouse_Bounder
         private void UpdateProcessListComboBox(ref ComboBox comboBox)
         {
             comboBox.Items.Clear();
-            Process[] runningProcesses = Process.GetProcesses();
-            foreach (Process process in runningProcesses)
+            Process[] processes = Process.GetProcesses();
+            foreach (Process process in processes)
             {
                 comboBox.Items.Add(process.ProcessName);
             }
