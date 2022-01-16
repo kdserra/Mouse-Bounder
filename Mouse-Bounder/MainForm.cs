@@ -129,8 +129,6 @@ namespace Mouse_Bounder
 
         private void unboundBtn_Click(object sender, EventArgs e)
         {
-            Process selectedProcess = this.GetSelectedProcess();
-            if (selectedProcess == null) { return; }
             this.ResetFields();
         }
 
