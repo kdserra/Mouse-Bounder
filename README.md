@@ -4,7 +4,7 @@ Restrict the mouse to the bounds of a Windows application.
 
 # Usage
 
-1. Open Mouse Bounder, and press the "Bound" button.
+1. Open Mouse Bounder
 2. Open the Process List
 3. Select a Process
 4. Press the "Bound" button
