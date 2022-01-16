@@ -69,9 +69,8 @@ namespace Mouse_Bounder
         {
             while (this.ShouldResrictMouse())
             {
-                Rect? windowRectUnsafe = GetWindowRect(ref this.m_boundProcess) ;
-                if (windowRectUnsafe == null) { continue; }
-                Rect windowRect = (Rect)windowRectUnsafe;
+                Rect windowRect = new Rect();
+                if (!this.GetWindowRect(ref this.m_boundProcess, ref windowRect)) { return; }
                 windowRect.Left += WINDOW_BOUNDARY_OFFSET;
                 windowRect.Right -= WINDOW_BOUNDARY_OFFSET;
                 windowRect.Top += WINDOW_BOUNDARY_OFFSET;
@@ -96,13 +95,11 @@ namespace Mouse_Bounder
             UpdateProcessListComboBox(ref processComboBox);
         }
 
-        private Rect? GetWindowRect(ref Process process)
+        private bool GetWindowRect(ref Process process, ref Rect outRect)
         {
-            if (process == null) { return null; }
+            if (process == null) { return false; }
             IntPtr windowPtr = process.MainWindowHandle;
-            Rect windowRect = new Rect();
-            GetWindowRect(windowPtr, ref windowRect);
-            return windowRect;
+            return GetWindowRect(windowPtr, ref outRect);
         }
 
         private void UpdateProcessListComboBox(ref ComboBox comboBox)
