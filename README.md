@@ -1,3 +1,4 @@
+
 # Mouse Bounder
 
 <p align="center">
@@ -15,7 +16,7 @@
 3. Select a Process
 4. Press the "Bound" button
 5. Done!
-6. When you are finshed, press the "Unbound" button.
+6. When you are finished, press the "Unbound" button.
 
 The refresh button will update the process list.
 
@@ -31,7 +32,10 @@ Built using Visual Studio 2019
 # Credits
 
 Cursor by Tyler Gobberdiel from NounProject.com
+
 https://thenounproject.com/icon/cursor-4059739/
 
+
 Bounding Box by Zach Bogart from NounProject.com
+
 https://thenounproject.com/icon/bounding-box-2202252/
