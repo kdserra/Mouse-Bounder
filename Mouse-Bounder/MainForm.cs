@@ -27,8 +27,6 @@ namespace Mouse_Bounder
         public static int BoundKey = DEFAULT_BOUND_TOGGLE_KEY;
         public static string LastProcess = DEFAULT_LAST_PROCESS;
         private bool m_inProcessMode = true;
-        private bool m_terminateOldThread = false;
-        private bool m_threadActive = false;
         private bool m_isMouseBounded = false;
         private Process m_boundProcess;
         private Thread m_mouseBounderThread;
@@ -130,9 +128,9 @@ namespace Mouse_Bounder
 
         private void RestrictMouseMovement()
         {
-            Process boundProcessBuffer = this.m_boundProcess;
             while (this.ShouldResrictMouse())
             {
+                Process boundProcessBuffer = this.m_boundProcess;
                 Rect boundRect = new Rect();
 
                 if (this.m_inProcessMode)
@@ -206,7 +204,6 @@ namespace Mouse_Bounder
                     boundProcessLbl.Text = BOUND_TO_TEXT + "None";
                 });
             }
-
 
             this.ResetFields();
         }
@@ -377,6 +374,42 @@ namespace Mouse_Bounder
                     }
                 }
             }
+        }
+
+        private void xPosTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !
+            (
+                Char.IsNumber(e.KeyChar) ||
+                Char.IsControl(e.KeyChar)
+            );
+        }
+
+        private void yPosTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !
+            (
+                Char.IsNumber(e.KeyChar) ||
+                Char.IsControl(e.KeyChar)
+            );
+        }
+
+        private void widthTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !
+            (
+                Char.IsNumber(e.KeyChar) ||
+                Char.IsControl(e.KeyChar)
+            );
+        }
+
+        private void heightTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !
+            (
+                Char.IsNumber(e.KeyChar) ||
+                Char.IsControl(e.KeyChar)
+            );
         }
     }
 }

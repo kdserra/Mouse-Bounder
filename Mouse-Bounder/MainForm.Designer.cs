@@ -175,6 +175,7 @@ namespace Mouse_Bounder
             this.heightTextbox.Name = "heightTextbox";
             this.heightTextbox.Size = new System.Drawing.Size(38, 23);
             this.heightTextbox.TabIndex = 17;
+            this.heightTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.heightTextbox_KeyPress);
             // 
             // xPosTextBox
             // 
@@ -183,6 +184,7 @@ namespace Mouse_Bounder
             this.xPosTextBox.Name = "xPosTextBox";
             this.xPosTextBox.Size = new System.Drawing.Size(38, 23);
             this.xPosTextBox.TabIndex = 11;
+            this.xPosTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.xPosTextBox_KeyPress);
             // 
             // xLbl
             // 
@@ -200,6 +202,7 @@ namespace Mouse_Bounder
             this.yPosTextBox.Name = "yPosTextBox";
             this.yPosTextBox.Size = new System.Drawing.Size(38, 23);
             this.yPosTextBox.TabIndex = 13;
+            this.yPosTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.yPosTextBox_KeyPress);
             // 
             // yPos
             // 
@@ -226,6 +229,7 @@ namespace Mouse_Bounder
             this.widthTextBox.Name = "widthTextBox";
             this.widthTextBox.Size = new System.Drawing.Size(38, 23);
             this.widthTextBox.TabIndex = 15;
+            this.widthTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.widthTextBox_KeyPress);
             // 
             // processModePanel
             // 
