@@ -72,7 +72,7 @@ namespace Mouse_Bounder
             // 
             // applyBtn
             // 
-            this.applyBtn.Location = new System.Drawing.Point(12, 235);
+            this.applyBtn.Location = new System.Drawing.Point(12, 184);
             this.applyBtn.Name = "applyBtn";
             this.applyBtn.Size = new System.Drawing.Size(105, 23);
             this.applyBtn.TabIndex = 4;
@@ -94,7 +94,7 @@ namespace Mouse_Bounder
             // 
             // resetBtn
             // 
-            this.resetBtn.Location = new System.Drawing.Point(234, 235);
+            this.resetBtn.Location = new System.Drawing.Point(234, 184);
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(105, 23);
             this.resetBtn.TabIndex = 11;
@@ -115,7 +115,7 @@ namespace Mouse_Bounder
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(123, 235);
+            this.saveBtn.Location = new System.Drawing.Point(123, 184);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(105, 23);
             this.saveBtn.TabIndex = 13;
@@ -170,7 +170,7 @@ namespace Mouse_Bounder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 368);
+            this.ClientSize = new System.Drawing.Size(361, 225);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.boundToggleBtn);
