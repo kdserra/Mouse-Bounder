@@ -27,6 +27,11 @@ namespace Mouse_Bounder
         public static int BoundKey = DEFAULT_BOUND_TOGGLE_KEY;
         public static string LastProcess = DEFAULT_LAST_PROCESS;
         private bool m_inProcessMode = true;
+        private bool m_terminateOldThread = false;
+        private bool m_threadActive = false;
+        private bool m_isMouseBounded = false;
+        private Process m_boundProcess;
+        private Thread m_mouseBounderThread;
 
         public struct POINT
         {
@@ -60,11 +65,6 @@ namespace Mouse_Bounder
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern Int32 GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
-
-
-        private bool m_isMouseBounded = false;
-        private Process m_boundProcess;
-        private Thread m_mouseBounderThread;
 
         private string GetProcessIdentifierName(Process process)
         {
