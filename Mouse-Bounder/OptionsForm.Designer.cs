@@ -43,6 +43,8 @@ namespace Mouse_Bounder
             this.borderOffsetTextBox = new System.Windows.Forms.TextBox();
             this.boundToggleBtn = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // bindWhenFocusedCheckBox
@@ -59,7 +61,7 @@ namespace Mouse_Bounder
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 71);
+            this.label1.Location = new System.Drawing.Point(12, 121);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 15);
             this.label1.TabIndex = 3;
@@ -70,7 +72,7 @@ namespace Mouse_Bounder
             // 
             // applyBtn
             // 
-            this.applyBtn.Location = new System.Drawing.Point(12, 131);
+            this.applyBtn.Location = new System.Drawing.Point(12, 235);
             this.applyBtn.Name = "applyBtn";
             this.applyBtn.Size = new System.Drawing.Size(105, 23);
             this.applyBtn.TabIndex = 4;
@@ -82,7 +84,7 @@ namespace Mouse_Bounder
             // 
             this.label3.AutoSize = true;
             this.label3.Enabled = false;
-            this.label3.Location = new System.Drawing.Point(12, 99);
+            this.label3.Location = new System.Drawing.Point(12, 149);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(102, 15);
             this.label3.TabIndex = 7;
@@ -92,7 +94,7 @@ namespace Mouse_Bounder
             // 
             // resetBtn
             // 
-            this.resetBtn.Location = new System.Drawing.Point(234, 131);
+            this.resetBtn.Location = new System.Drawing.Point(234, 235);
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(105, 23);
             this.resetBtn.TabIndex = 11;
@@ -108,13 +110,12 @@ namespace Mouse_Bounder
             this.rememberProcessesCheckBox.Size = new System.Drawing.Size(175, 19);
             this.rememberProcessesCheckBox.TabIndex = 12;
             this.rememberProcessesCheckBox.Text = "Remember Previous Process";
-            this.toolTip1.SetToolTip(this.rememberProcessesCheckBox, "Remember the last typed process between sessions.  Note: Does not auto bind to sa" +
-        "id process.  Remember to save changes.");
+            this.toolTip1.SetToolTip(this.rememberProcessesCheckBox, "Remember the last typed process between sessions.");
             this.rememberProcessesCheckBox.UseVisualStyleBackColor = true;
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(123, 131);
+            this.saveBtn.Location = new System.Drawing.Point(123, 235);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(105, 23);
             this.saveBtn.TabIndex = 13;
@@ -124,7 +125,7 @@ namespace Mouse_Bounder
             // 
             // borderOffsetTextBox
             // 
-            this.borderOffsetTextBox.Location = new System.Drawing.Point(137, 65);
+            this.borderOffsetTextBox.Location = new System.Drawing.Point(137, 115);
             this.borderOffsetTextBox.MaxLength = 4;
             this.borderOffsetTextBox.Name = "borderOffsetTextBox";
             this.borderOffsetTextBox.Size = new System.Drawing.Size(75, 23);
@@ -134,7 +135,7 @@ namespace Mouse_Bounder
             // boundToggleBtn
             // 
             this.boundToggleBtn.Enabled = false;
-            this.boundToggleBtn.Location = new System.Drawing.Point(137, 95);
+            this.boundToggleBtn.Location = new System.Drawing.Point(137, 145);
             this.boundToggleBtn.Name = "boundToggleBtn";
             this.boundToggleBtn.Size = new System.Drawing.Size(75, 23);
             this.boundToggleBtn.TabIndex = 14;
@@ -143,11 +144,35 @@ namespace Mouse_Bounder
             this.boundToggleBtn.Visible = false;
             this.boundToggleBtn.Click += new System.EventHandler(this.boundToggleBtn_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(12, 65);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(102, 19);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Text = "Always on Top";
+            this.toolTip1.SetToolTip(this.checkBox1, "Sets Mouse Bounder to be displayed on top of other applications.");
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(12, 90);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(223, 19);
+            this.checkBox3.TabIndex = 17;
+            this.checkBox3.Text = "Auto-Bind to Remembered Processes";
+            this.toolTip1.SetToolTip(this.checkBox3, "Automatically bind to the last process Mouse Bounder remembers.");
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 168);
+            this.ClientSize = new System.Drawing.Size(361, 368);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.boundToggleBtn);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.rememberProcessesCheckBox);
@@ -183,5 +208,7 @@ namespace Mouse_Bounder
         private System.Windows.Forms.TextBox borderOffsetTextBox;
         private System.Windows.Forms.Button boundToggleBtn;
         private ToolTip toolTip1;
+        private CheckBox checkBox1;
+        private CheckBox checkBox3;
     }
 }

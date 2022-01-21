@@ -16,6 +16,8 @@ namespace Mouse_Bounder
         public const bool DEFAULT_BOUND_TOGGLE_KEY_ENABLED = false;
         public const int DEFAULT_BOUND_TOGGLE_KEY = 0;
         public const string DEFAULT_LAST_PROCESS = "";
+        public const bool DEFAULT_ALWAYS_ON_TOP = false;
+        public const bool DEFAULT_AUTO_BIND_TO_REMEMBERED_PROCESSES = false;
         private const string WINDOW_NAME = "Mouse Bounder";
         private const string WINDOW_NAME_BOUND = "Mouse Bounder [Bound]";
         private const string WINDOW_NAME_PAUSED = "Mouse Bounder [Paused]";
@@ -26,8 +28,11 @@ namespace Mouse_Bounder
         public static bool BoundKeyEnabled = DEFAULT_BOUND_TOGGLE_KEY_ENABLED;
         public static int BoundKey = DEFAULT_BOUND_TOGGLE_KEY;
         public static string LastProcess = DEFAULT_LAST_PROCESS;
+        public static bool AlwaysOnTop = DEFAULT_ALWAYS_ON_TOP;
+        public static bool AutoBindToRememberedProcesses = DEFAULT_AUTO_BIND_TO_REMEMBERED_PROCESSES;
         private bool m_inProcessMode = true;
         private bool m_isMouseBounded = false;
+        private bool m_isMainFormClosing = false;
         private Process m_boundProcess;
         private Thread m_mouseBounderThread;
 
@@ -64,6 +69,16 @@ namespace Mouse_Bounder
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern Int32 GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
+        private bool IsMainFormReadyAndSafe()
+        {
+            if (this == null) { return false; }
+            if (!this.IsHandleCreated) { return false; }
+            if (this.m_isMainFormClosing) { return false; }
+            if (this.IsDisposed) { return false; }
+            if (this.Disposing) { return false; }
+            return true;
+        }
+
         private string GetProcessIdentifierName(Process process)
         {
             return process.ProcessName + " [" + process.Id + "]";
@@ -77,7 +92,15 @@ namespace Mouse_Bounder
             MainForm.BoundKeyEnabled = Settings.Default.BOUND_TOGGLE_KEY_ENABLED;
             MainForm.BoundKey = Settings.Default.BOUND_TOGGLE_KEY;
             MainForm.LastProcess = Settings.Default.LAST_PROCESS;
-            if (MainForm.RememberLastProcess) { processComboBox.Text = MainForm.LastProcess; }
+            MainForm.AlwaysOnTop = Settings.Default.ALWAYS_ON_TOP;
+            MainForm.AutoBindToRememberedProcesses = Settings.Default.AUTO_BIND_TO_REMEMBERED_PROCESSES;
+            if (MainForm.AlwaysOnTop) { this.TopMost = MainForm.AlwaysOnTop; }
+            if (MainForm.RememberLastProcess)
+            {
+                this.m_inProcessMode = true;
+                processComboBox.Text = MainForm.LastProcess;
+                if (MainForm.AutoBindToRememberedProcesses) { this.Bound(); }
+            }
         }
 
         private int GetWindowBoundaryOffset()
@@ -143,12 +166,7 @@ namespace Mouse_Bounder
                         {
                             if (focusedProcess.Id != boundProcessBuffer.Id)
                             {
-                                if (this != null)
-                                {
-                                    this.Invoke((MethodInvoker)delegate {
-                                        this.SetFormTitle(WINDOW_NAME_PAUSED);
-                                    });
-                                }
+                                this.SetFormTitleThreadsafe(WINDOW_NAME_PAUSED);
                                 continue;
                             }
                         }
@@ -166,12 +184,7 @@ namespace Mouse_Bounder
                     boundRect.Bottom = yPos + width;
                 }
 
-                if (this != null)
-                {
-                    this.Invoke((MethodInvoker)delegate {
-                        this.SetFormTitle(WINDOW_NAME_BOUND);
-                    });
-                }
+                this.SetFormTitleThreadsafe(WINDOW_NAME_BOUND);
 
                 boundRect.Left += GetWindowBoundaryOffset();
                 boundRect.Right -= GetWindowBoundaryOffset();
@@ -189,20 +202,18 @@ namespace Mouse_Bounder
                     Cursor.Position = positionBuffer;
                 }
             }
-
-            if (this != null)
-            {
-                this.Invoke((MethodInvoker)delegate
-                {
-                    this.SetFormTitle(WINDOW_NAME);
-                });
-            }
+            this.SetFormTitleThreadsafe(WINDOW_NAME);
 
             if (boundProcessLbl != null)
             {
-                boundProcessLbl.Invoke((MethodInvoker)delegate {
-                    boundProcessLbl.Text = BOUND_TO_TEXT + "None";
-                });
+                try
+                {
+                    boundProcessLbl.Invoke((MethodInvoker)delegate
+                    {
+                        boundProcessLbl.Text = BOUND_TO_TEXT + "None";
+                    });
+                }
+                catch {}
             }
 
             this.ResetFields();
@@ -258,9 +269,26 @@ namespace Mouse_Bounder
             }
             return null;
         }
+
+        private void SetFormTitleThreadsafe(string title)
+        {
+            if (this.IsMainFormReadyAndSafe())
+            {
+                try
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        this.SetFormTitle(title);
+                    });
+                }
+                catch { }
+            }
+        }
+
+
         private void SetFormTitle(string title)
         {
-            if (this != null)
+            if (this.IsMainFormReadyAndSafe())
             {
                 if (this.Text == title) { return; }
                 this.Text = title;
@@ -281,7 +309,7 @@ namespace Mouse_Bounder
             this.ResetFields();
         }
 
-        private void boundBtn_Click(object sender, EventArgs e)
+        private void Bound()
         {
             this.ResetFields();
             if (this.m_inProcessMode)
@@ -309,6 +337,11 @@ namespace Mouse_Bounder
                 this.SetFormTitle(WINDOW_NAME_BOUND);
             }
         }
+
+        private void boundBtn_Click(object sender, EventArgs e)
+        {
+            this.Bound();
+        }
         private void unboundBtn_Click(object sender, EventArgs e)
         {
             this.ResetAll();
@@ -320,6 +353,7 @@ namespace Mouse_Bounder
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             this.ResetAll();
+            this.m_isMainFormClosing = true;
         }
         private void switchToManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -351,14 +385,25 @@ namespace Mouse_Bounder
             }
         }
 
+        private void OptionsForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            if (!this.IsMainFormReadyAndSafe()) { return; }
+            this.TopMost = MainForm.AlwaysOnTop;
+        }
+
+
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OptionsForm form = new OptionsForm();
+            form.FormClosed += this.OptionsForm_Closed;
+            form.TopMost = MainForm.AlwaysOnTop;
             form.ShowDialog();
         }
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm form = new AboutForm();
+            form.TopMost = MainForm.AlwaysOnTop;
             form.ShowDialog();
         }
 
@@ -415,6 +460,7 @@ namespace Mouse_Bounder
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             HelpForm form = new HelpForm();
+            form.TopMost = MainForm.AlwaysOnTop;
             form.ShowDialog();
         }
     }

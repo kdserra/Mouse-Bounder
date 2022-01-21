@@ -20,6 +20,8 @@ namespace Mouse_Bounder
             borderOffsetTextBox.Text = MainForm.BorderOffset.ToString();
             KeysConverter kc = new KeysConverter();
             boundToggleBtn.Text = kc.ConvertToString(MainForm.BoundKey);
+            checkBox1.Checked = MainForm.AlwaysOnTop;
+            checkBox3.Checked = MainForm.AutoBindToRememberedProcesses;
         }
 
         private void ApplySettings()
@@ -30,6 +32,8 @@ namespace Mouse_Bounder
             MainForm.BoundKeyEnabled = (boundToggleBtn.Text != "None");
             MainForm.LastProcess = MainForm.DEFAULT_LAST_PROCESS;
             MainForm.BoundKey = this.m_keyValueBuffer;
+            MainForm.AlwaysOnTop = this.checkBox1.Checked;
+            MainForm.AutoBindToRememberedProcesses = checkBox3.Checked;
         }
 
         private void SaveSettings()
@@ -40,6 +44,8 @@ namespace Mouse_Bounder
             Settings.Default.BOUND_TOGGLE_KEY_ENABLED = MainForm.BoundKeyEnabled;
             Settings.Default.BOUND_TOGGLE_KEY = MainForm.BoundKey;
             Settings.Default.LAST_PROCESS = MainForm.LastProcess;
+            Settings.Default.ALWAYS_ON_TOP = MainForm.AlwaysOnTop;
+            Settings.Default.AUTO_BIND_TO_REMEMBERED_PROCESSES = MainForm.AutoBindToRememberedProcesses;
             Settings.Default.Save();
         }
 
@@ -98,6 +104,8 @@ namespace Mouse_Bounder
             MainForm.BoundKeyEnabled = MainForm.DEFAULT_BOUND_TOGGLE_KEY_ENABLED;
             MainForm.BoundKey = MainForm.DEFAULT_BOUND_TOGGLE_KEY;
             MainForm.LastProcess = MainForm.DEFAULT_LAST_PROCESS;
+            MainForm.AlwaysOnTop = MainForm.DEFAULT_ALWAYS_ON_TOP;
+            MainForm.AutoBindToRememberedProcesses = MainForm.DEFAULT_AUTO_BIND_TO_REMEMBERED_PROCESSES;
             this.UpdateComponents();
             this.SaveSettings();
         }

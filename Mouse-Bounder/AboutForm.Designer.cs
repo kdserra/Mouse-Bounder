@@ -46,7 +46,7 @@ namespace Mouse_Bounder
             this.versionLbl.Name = "versionLbl";
             this.versionLbl.Size = new System.Drawing.Size(118, 25);
             this.versionLbl.TabIndex = 0;
-            this.versionLbl.Text = "Version 1.1.0";
+            this.versionLbl.Text = "Version 1.2.0";
             // 
             // label3
             // 
@@ -66,7 +66,7 @@ namespace Mouse_Bounder
             this.linkLabel1.TabIndex = 6;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "https://github.com/kdserra/Mouse-Bounder";
-            this.linkLabel1.LinkClicked += new LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label1
             // 

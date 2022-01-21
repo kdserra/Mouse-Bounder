@@ -94,5 +94,29 @@ namespace Mouse_Bounder {
                 this["LAST_PROCESS"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ALWAYS_ON_TOP {
+            get {
+                return ((bool)(this["ALWAYS_ON_TOP"]));
+            }
+            set {
+                this["ALWAYS_ON_TOP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AUTO_BIND_TO_REMEMBERED_PROCESSES {
+            get {
+                return ((bool)(this["AUTO_BIND_TO_REMEMBERED_PROCESSES"]));
+            }
+            set {
+                this["AUTO_BIND_TO_REMEMBERED_PROCESSES"] = value;
+            }
+        }
     }
 }
