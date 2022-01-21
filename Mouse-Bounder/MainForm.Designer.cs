@@ -42,13 +42,13 @@ namespace Mouse_Bounder
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.boundProcessLbl = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.heightTextbox = new System.Windows.Forms.TextBox();
+            this.xPosTextBox = new System.Windows.Forms.TextBox();
             this.xLbl = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.yPosTextBox = new System.Windows.Forms.TextBox();
             this.yPos = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.widthTextBox = new System.Windows.Forms.TextBox();
             this.processModePanel = new System.Windows.Forms.Panel();
             this.manualModePanel = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -168,21 +168,21 @@ namespace Mouse_Bounder
             this.label1.TabIndex = 18;
             this.label1.Text = "H";
             // 
-            // textBox3
+            // heightTextbox
             // 
-            this.textBox3.Location = new System.Drawing.Point(230, 28);
-            this.textBox3.MaxLength = 5;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(38, 23);
-            this.textBox3.TabIndex = 17;
+            this.heightTextbox.Location = new System.Drawing.Point(230, 28);
+            this.heightTextbox.MaxLength = 5;
+            this.heightTextbox.Name = "heightTextbox";
+            this.heightTextbox.Size = new System.Drawing.Size(38, 23);
+            this.heightTextbox.TabIndex = 17;
             // 
-            // textBox1
+            // xPosTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(32, 28);
-            this.textBox1.MaxLength = 5;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(38, 23);
-            this.textBox1.TabIndex = 11;
+            this.xPosTextBox.Location = new System.Drawing.Point(32, 28);
+            this.xPosTextBox.MaxLength = 5;
+            this.xPosTextBox.Name = "xPosTextBox";
+            this.xPosTextBox.Size = new System.Drawing.Size(38, 23);
+            this.xPosTextBox.TabIndex = 11;
             // 
             // xLbl
             // 
@@ -193,13 +193,13 @@ namespace Mouse_Bounder
             this.xLbl.TabIndex = 12;
             this.xLbl.Text = "X";
             // 
-            // textBox2
+            // yPosTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(96, 28);
-            this.textBox2.MaxLength = 5;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(38, 23);
-            this.textBox2.TabIndex = 13;
+            this.yPosTextBox.Location = new System.Drawing.Point(96, 28);
+            this.yPosTextBox.MaxLength = 5;
+            this.yPosTextBox.Name = "yPosTextBox";
+            this.yPosTextBox.Size = new System.Drawing.Size(38, 23);
+            this.yPosTextBox.TabIndex = 13;
             // 
             // yPos
             // 
@@ -219,13 +219,13 @@ namespace Mouse_Bounder
             this.label2.TabIndex = 16;
             this.label2.Text = "W";
             // 
-            // textBox4
+            // widthTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(164, 28);
-            this.textBox4.MaxLength = 5;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(38, 23);
-            this.textBox4.TabIndex = 15;
+            this.widthTextBox.Location = new System.Drawing.Point(164, 28);
+            this.widthTextBox.MaxLength = 5;
+            this.widthTextBox.Name = "widthTextBox";
+            this.widthTextBox.Size = new System.Drawing.Size(38, 23);
+            this.widthTextBox.TabIndex = 15;
             // 
             // processModePanel
             // 
@@ -233,19 +233,19 @@ namespace Mouse_Bounder
             this.processModePanel.Controls.Add(this.processComboBox);
             this.processModePanel.Location = new System.Drawing.Point(8, 25);
             this.processModePanel.Name = "processModePanel";
-            this.processModePanel.Size = new System.Drawing.Size(249, 53);
+            this.processModePanel.Size = new System.Drawing.Size(259, 53);
             this.processModePanel.TabIndex = 11;
             // 
             // manualModePanel
             // 
             this.manualModePanel.Controls.Add(this.label3);
             this.manualModePanel.Controls.Add(this.label1);
-            this.manualModePanel.Controls.Add(this.textBox3);
-            this.manualModePanel.Controls.Add(this.textBox4);
+            this.manualModePanel.Controls.Add(this.heightTextbox);
+            this.manualModePanel.Controls.Add(this.widthTextBox);
             this.manualModePanel.Controls.Add(this.label2);
-            this.manualModePanel.Controls.Add(this.textBox1);
+            this.manualModePanel.Controls.Add(this.xPosTextBox);
             this.manualModePanel.Controls.Add(this.yPos);
-            this.manualModePanel.Controls.Add(this.textBox2);
+            this.manualModePanel.Controls.Add(this.yPosTextBox);
             this.manualModePanel.Controls.Add(this.xLbl);
             this.manualModePanel.Enabled = false;
             this.manualModePanel.Location = new System.Drawing.Point(-4, 19);
@@ -306,14 +306,14 @@ namespace Mouse_Bounder
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.Label boundProcessLbl;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox xPosTextBox;
         private System.Windows.Forms.Label xLbl;
         private System.Windows.Forms.Label yPos;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox yPosTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox heightTextbox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox widthTextBox;
         private System.Windows.Forms.Panel processModePanel;
         private System.Windows.Forms.Panel manualModePanel;
         private System.Windows.Forms.Label label3;
