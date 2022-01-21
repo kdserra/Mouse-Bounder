@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Mouse_Bounder
 {
@@ -15,6 +16,9 @@ namespace Mouse_Bounder
         public const bool DEFAULT_BOUND_TOGGLE_KEY_ENABLED = false;
         public const int DEFAULT_BOUND_TOGGLE_KEY = 0;
         public const string DEFAULT_LAST_PROCESS = "";
+        private const string WINDOW_NAME = "Mouse Bounder";
+        private const string WINDOW_NAME_BOUND = "Mouse Bounder [Bound]";
+        private const string WINDOW_NAME_PAUSED = "Mouse Bounder [Paused]";
         private const string BOUND_TO_TEXT = "Bound to: ";
         public static bool BoundWhenFocused = DEFAULT_BOUND_WHEN_FOCUSED;
         public static bool RememberLastProcess = DEFAULT_REMEMBER_LAST_PROCESS;
@@ -62,6 +66,11 @@ namespace Mouse_Bounder
         private Process m_boundProcess;
         private Thread m_mouseBounderThread;
 
+        private string GetProcessIdentifierName(Process process)
+        {
+            return process.ProcessName + " [" + process.Id + "]";
+        }
+
         private void LoadSettings()
         {
             MainForm.BoundWhenFocused = Settings.Default.BOUND_WHEN_FOCUSED;
@@ -94,10 +103,11 @@ namespace Mouse_Bounder
 
         private bool ShouldResrictMouse()
         {
-            return (
-                this.m_isMouseBounded &&
-                this.IsProcessActive(this.m_boundProcess)
-            );
+            if (this.m_inProcessMode)
+            {
+                return (this.m_isMouseBounded && this.IsProcessActive(this.m_boundProcess));
+            }
+            return this.m_isMouseBounded;
         }
 
         private bool GetCurrentFocusedProcess(out Process focusedProcess)
@@ -123,41 +133,80 @@ namespace Mouse_Bounder
             Process boundProcessBuffer = this.m_boundProcess;
             while (this.ShouldResrictMouse())
             {
-                if (MainForm.BoundWhenFocused)
+                Rect boundRect = new Rect();
+
+                if (this.m_inProcessMode)
                 {
-                    Process focusedProcess = null;
-                    if (this.GetCurrentFocusedProcess(out focusedProcess))
+                    if (!this.GetWindowRect(ref boundProcessBuffer, ref boundRect)) { return; }
+                    if (MainForm.BoundWhenFocused)
                     {
-                        if (focusedProcess.Id != boundProcessBuffer.Id) { continue; }
+                        Process focusedProcess = null;
+                        if (this.GetCurrentFocusedProcess(out focusedProcess))
+                        {
+                            if (focusedProcess.Id != boundProcessBuffer.Id)
+                            {
+                                if (this != null)
+                                {
+                                    this.Invoke((MethodInvoker)delegate {
+                                        this.SetFormTitle(WINDOW_NAME_PAUSED);
+                                    });
+                                }
+                                continue;
+                            }
+                        }
                     }
                 }
+                else
+                {
+                    int xPos = int.Parse(xPosTextBox.Text);
+                    int yPos = int.Parse(yPosTextBox.Text);
+                    int width = int.Parse(widthTextBox.Text);
+                    int height = int.Parse(heightTextbox.Text);
+                    boundRect.Left = xPos;
+                    boundRect.Right = xPos + width;
+                    boundRect.Top = yPos;
+                    boundRect.Bottom = yPos + width;
+                }
 
-                Rect windowRect = new Rect();
-                if (!this.GetWindowRect(ref boundProcessBuffer, ref windowRect)) { return; }
-                windowRect.Left += GetWindowBoundaryOffset();
-                windowRect.Right -= GetWindowBoundaryOffset();
-                windowRect.Top += GetWindowBoundaryOffset();
-                windowRect.Bottom -= GetWindowBoundaryOffset();
+                if (this != null)
+                {
+                    this.Invoke((MethodInvoker)delegate {
+                        this.SetFormTitle(WINDOW_NAME_BOUND);
+                    });
+                }
+
+                boundRect.Left += GetWindowBoundaryOffset();
+                boundRect.Right -= GetWindowBoundaryOffset();
+                boundRect.Top += GetWindowBoundaryOffset();
+                boundRect.Bottom -= GetWindowBoundaryOffset();
 
                 Point positionBuffer = Cursor.Position;
-                bool isCursorWithinBounds = windowRect.Contains(positionBuffer);
+                bool isCursorWithinBounds = boundRect.Contains(positionBuffer);
                 if (!isCursorWithinBounds)
                 {
-                    if (positionBuffer.X < windowRect.Left) { positionBuffer.X = windowRect.Left; }
-                    if (positionBuffer.X > windowRect.Right) { positionBuffer.X = windowRect.Right; }
-                    if (positionBuffer.Y < windowRect.Top) { positionBuffer.Y = windowRect.Top; }
-                    if (positionBuffer.Y > windowRect.Bottom) { positionBuffer.Y = windowRect.Bottom; }
+                    if (positionBuffer.X < boundRect.Left) { positionBuffer.X = boundRect.Left; }
+                    if (positionBuffer.X > boundRect.Right) { positionBuffer.X = boundRect.Right; }
+                    if (positionBuffer.Y < boundRect.Top) { positionBuffer.Y = boundRect.Top; }
+                    if (positionBuffer.Y > boundRect.Bottom) { positionBuffer.Y = boundRect.Bottom; }
                     Cursor.Position = positionBuffer;
                 }
             }
 
-            MainForm.ActiveForm.Invoke((MethodInvoker)delegate {
-                this.SetFormTitle("Mouse Bounder");
-            });
+            if (this != null)
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    this.SetFormTitle(WINDOW_NAME);
+                });
+            }
 
-            boundProcessLbl.Invoke((MethodInvoker)delegate {
-                if (boundProcessLbl != null) { boundProcessLbl.Text = BOUND_TO_TEXT + "None"; }
-            });
+            if (boundProcessLbl != null)
+            {
+                boundProcessLbl.Invoke((MethodInvoker)delegate {
+                    boundProcessLbl.Text = BOUND_TO_TEXT + "None";
+                });
+            }
+
 
             this.ResetFields();
         }
@@ -183,17 +232,29 @@ namespace Mouse_Bounder
             Process[] processes = Process.GetProcesses();
             foreach (Process process in processes)
             {
-                comboBox.Items.Add(process.ProcessName);
+                comboBox.Items.Add(this.GetProcessIdentifierName(process));
             }
         }
 
         private Process GetSelectedProcess()
         {
-            string selectedProcess = processComboBox.Text;
+            string selectedProcessInput = processComboBox.Text;
             Process[] runningProcesses = Process.GetProcesses();
             foreach (Process process in runningProcesses)
             {
-                if (selectedProcess == process.ProcessName)
+                if (selectedProcessInput == this.GetProcessIdentifierName(process))
+                {
+                    return process;
+                }
+                if (selectedProcessInput == process.ProcessName)
+                {
+                    return process;
+                }
+                if (selectedProcessInput.ToLower() == this.GetProcessIdentifierName(process).ToLower())
+                {
+                    return process;
+                }
+                if (selectedProcessInput.ToLower() == process.ProcessName.ToLower())
                 {
                     return process;
                 }
@@ -202,7 +263,11 @@ namespace Mouse_Bounder
         }
         private void SetFormTitle(string title)
         {
-            if (MainForm.ActiveForm != null) { MainForm.ActiveForm.Text = title; }
+            if (this != null)
+            {
+                if (this.Text == title) { return; }
+                this.Text = title;
+            }
         }
 
         private void ResetFields()
@@ -214,7 +279,7 @@ namespace Mouse_Bounder
 
         private void ResetAll()
         {
-            this.SetFormTitle("Mouse Bounder");
+            this.SetFormTitle(WINDOW_NAME);
             boundProcessLbl.Text = BOUND_TO_TEXT + "None";
             this.ResetFields();
         }
@@ -224,14 +289,14 @@ namespace Mouse_Bounder
             this.ResetFields();
             if (this.m_inProcessMode)
             {
-                Process selectedProcess = this.GetSelectedProcess();
-                if (selectedProcess == null) { return; }
+                Process selectedProcessBuffer = this.GetSelectedProcess();
+                if (selectedProcessBuffer == null) { return; }
                 this.m_isMouseBounded = true;
-                this.m_boundProcess = selectedProcess;
+                this.m_boundProcess = selectedProcessBuffer;
                 this.m_mouseBounderThread = new Thread(new ThreadStart(this.RestrictMouseMovement));
                 this.m_mouseBounderThread.Start();
-                this.SetFormTitle("Mouse Bounder [Bounded]");
-                boundProcessLbl.Text = BOUND_TO_TEXT + selectedProcess.ProcessName;
+                this.SetFormTitle(WINDOW_NAME_BOUND);
+                boundProcessLbl.Text = BOUND_TO_TEXT + this.m_boundProcess.ProcessName;
                 if (MainForm.RememberLastProcess)
                 {
                     MainForm.LastProcess = processComboBox.Text;
@@ -241,7 +306,10 @@ namespace Mouse_Bounder
             }
             else
             {
-
+                this.m_isMouseBounded = true;
+                this.m_mouseBounderThread = new Thread(new ThreadStart(this.RestrictMouseMovement));
+                this.m_mouseBounderThread.Start();
+                this.SetFormTitle(WINDOW_NAME_BOUND);
             }
         }
         private void unboundBtn_Click(object sender, EventArgs e)
