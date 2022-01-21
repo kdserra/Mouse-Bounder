@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace Mouse_Bounder
 {
     partial class AboutForm
@@ -64,6 +66,7 @@ namespace Mouse_Bounder
             this.linkLabel1.TabIndex = 6;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "https://github.com/kdserra/Mouse-Bounder";
+            this.linkLabel1.LinkClicked += new LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label1
             // 
