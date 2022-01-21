@@ -40,6 +40,7 @@ namespace Mouse_Bounder
             this.switchModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.boundProcessLbl = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.heightTextbox = new System.Windows.Forms.TextBox();
@@ -109,7 +110,8 @@ namespace Mouse_Bounder
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1});
+            this.toolStripDropDownButton1,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(279, 25);
@@ -149,6 +151,16 @@ namespace Mouse_Bounder
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(36, 22);
+            this.toolStripButton1.Text = "Help";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // boundProcessLbl
             // 
@@ -321,6 +333,7 @@ namespace Mouse_Bounder
         private System.Windows.Forms.Panel processModePanel;
         private System.Windows.Forms.Panel manualModePanel;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 

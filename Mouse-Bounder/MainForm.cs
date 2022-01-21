@@ -411,5 +411,11 @@ namespace Mouse_Bounder
                 Char.IsControl(e.KeyChar)
             );
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            HelpForm form = new HelpForm();
+            form.ShowDialog();
+        }
     }
 }
