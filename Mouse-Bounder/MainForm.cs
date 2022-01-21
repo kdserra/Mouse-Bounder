@@ -394,6 +394,7 @@ namespace Mouse_Bounder
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.m_isMouseBounded = false;
             OptionsForm form = new OptionsForm();
             form.FormClosed += this.OptionsForm_Closed;
             form.TopMost = MainForm.AlwaysOnTop;
@@ -402,6 +403,7 @@ namespace Mouse_Bounder
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.m_isMouseBounded = false;
             AboutForm form = new AboutForm();
             form.TopMost = MainForm.AlwaysOnTop;
             form.ShowDialog();
@@ -459,6 +461,7 @@ namespace Mouse_Bounder
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            this.m_isMouseBounded = false;
             HelpForm form = new HelpForm();
             form.TopMost = MainForm.AlwaysOnTop;
             form.ShowDialog();
