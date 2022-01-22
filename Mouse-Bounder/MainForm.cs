@@ -324,7 +324,7 @@ namespace Mouse_Bounder
                 boundProcessLbl.Text = BOUND_TO_TEXT + this.m_boundProcess.ProcessName;
                 if (MainForm.RememberLastProcess)
                 {
-                    MainForm.LastProcess = processComboBox.Text;
+                    MainForm.LastProcess = selectedProcessBuffer.ProcessName;
                     Settings.Default.LAST_PROCESS = MainForm.LastProcess;
                     Settings.Default.Save();
                 }
