@@ -46,7 +46,7 @@ namespace Mouse_Bounder
             this.versionLbl.Name = "versionLbl";
             this.versionLbl.Size = new System.Drawing.Size(118, 25);
             this.versionLbl.TabIndex = 0;
-            this.versionLbl.Text = "Version 1.2.0";
+            this.versionLbl.Text = "Version 1.2.1";
             // 
             // label3
             // 
