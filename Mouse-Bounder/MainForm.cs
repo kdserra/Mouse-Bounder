@@ -136,7 +136,7 @@ namespace Mouse_Bounder
             if (hwnd == IntPtr.Zero) { focusedProcess = null;  return false; }
             uint processID;
             GetWindowThreadProcessId(hwnd, out processID);
-            foreach (System.Diagnostics.Process process in System.Diagnostics.Process.GetProcesses())
+            foreach (Process process in Process.GetProcesses())
             {
                 if (process.Id == processID)
                 {
