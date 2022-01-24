@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Mouse_Bounder
 {
@@ -22,6 +21,7 @@ namespace Mouse_Bounder
         private const string WINDOW_NAME_BOUND = "Mouse Bounder [Bound]";
         private const string WINDOW_NAME_PAUSED = "Mouse Bounder [Paused]";
         private const string BOUND_TO_TEXT = "Bound to: ";
+        private const string BOUND_TO_NONE_TEXT = "None";
         public static bool BoundWhenFocused = DEFAULT_BOUND_WHEN_FOCUSED;
         public static bool RememberLastProcess = DEFAULT_REMEMBER_LAST_PROCESS;
         public static int BorderOffset = DEFAULT_BORDER_OFFSET;
@@ -110,7 +110,6 @@ namespace Mouse_Bounder
 
         private bool IsProcessActive(Process process)
         {
-            if (process == null) { return false; }
             Process[] processes = Process.GetProcesses();
             foreach (Process proc in processes)
             {
@@ -158,7 +157,7 @@ namespace Mouse_Bounder
 
                 if (this.m_inProcessMode)
                 {
-                    if (!this.GetWindowRect(ref boundProcessBuffer, ref boundRect)) { return; }
+                    if (!this.GetWindowRect(ref boundProcessBuffer, ref boundRect)) { break; }
                     if (MainForm.BoundWhenFocused)
                     {
                         Process focusedProcess = null;
@@ -203,19 +202,7 @@ namespace Mouse_Bounder
                 }
             }
             this.SetFormTitleThreadsafe(WINDOW_NAME);
-
-            if (boundProcessLbl != null)
-            {
-                try
-                {
-                    boundProcessLbl.Invoke((MethodInvoker)delegate
-                    {
-                        boundProcessLbl.Text = BOUND_TO_TEXT + "None";
-                    });
-                }
-                catch {}
-            }
-
+            this.SetBoundTextThreadsafe(BOUND_TO_NONE_TEXT);
             this.ResetFields();
         }
 
@@ -284,7 +271,21 @@ namespace Mouse_Bounder
                 catch { }
             }
         }
-
+        private void SetBoundTextThreadsafe(string text)
+        {
+            if (boundProcessLbl != null)
+            {
+                if (boundProcessLbl.Text == text) { return; }
+                try
+                {
+                    boundProcessLbl.Invoke((MethodInvoker)delegate
+                    {
+                        boundProcessLbl.Text = BOUND_TO_TEXT + text;
+                    });
+                }
+                catch { }
+            }
+        }
 
         private void SetFormTitle(string title)
         {
@@ -305,7 +306,7 @@ namespace Mouse_Bounder
         private void ResetAll()
         {
             this.SetFormTitle(WINDOW_NAME);
-            boundProcessLbl.Text = BOUND_TO_TEXT + "None";
+            boundProcessLbl.Text = BOUND_TO_TEXT + BOUND_TO_NONE_TEXT;
             this.ResetFields();
         }
 
