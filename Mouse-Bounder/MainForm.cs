@@ -133,7 +133,7 @@ namespace Mouse_Bounder
         private bool GetCurrentFocusedProcess(out Process focusedProcess)
         {
             IntPtr hwnd = GetForegroundWindow();
-            if (hwnd == null) { focusedProcess = null;  return false; }
+            if (hwnd == IntPtr.Zero) { focusedProcess = null;  return false; }
             uint processID;
             GetWindowThreadProcessId(hwnd, out processID);
             foreach (System.Diagnostics.Process process in System.Diagnostics.Process.GetProcesses())
