@@ -36,7 +36,7 @@ namespace Mouse_Bounder
             int? GetProcessID(string processNamePID)
             {
                 if (processNamePID == null) { return null; }
-                // This regex is matches the process id tag from the string.
+                // This regex matches the process id tag from the string.
                 // Ex: "ProcessName [123]" -> " [123]"
                 string processIDRegex = @" \[[0-9]+\]$";
                 int processID = int.Parse(Regex.Match(processNamePID, processIDRegex).Value.Replace("[", "").Replace("]", ""));
