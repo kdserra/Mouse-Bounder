@@ -51,8 +51,6 @@ namespace Mouse_Bounder
             OnUnbound?.Invoke();
         }
 
-
-
         private static void GlobalHookMouseMoveExt(object sender, WindowsHook.MouseEventExtArgs e)
         {
             Rect? windowRect = Utilities.GetAdjustedWindowRect(m_BoundProcess);
