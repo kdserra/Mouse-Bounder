@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Mouse_Bounder
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         ///  The main entry point for the application.
@@ -17,7 +17,7 @@ namespace Mouse_Bounder
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new ManualModeForm());
         }
     }
 }
