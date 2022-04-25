@@ -12,12 +12,18 @@ using System.Windows.Forms;
 
 namespace Mouse_Bounder
 {
-    public partial class ManualModeForm : Form
+    public partial class AutomaticModeForm : Form
     {
-        public ManualModeForm()
+        public AutomaticModeForm()
         {
             InitializeComponent();
             UpdateProcessComboBox();
+            ProcessMouseBounder.OnUnbound += OnUnbound;
+        }
+
+        private void OnUnbound()
+        {
+            boundLbl.Text = "Bound to: None";
         }
 
         private string GetProcessNameWithPID(Process process)
@@ -60,7 +66,8 @@ namespace Mouse_Bounder
             string selection = processListComboBox.Text;
             Process process = GetProcessFromProcessNameWithPID(selection);
             if (process == null) { return; }
-            ProcessMouseBounder.BoundProcess(process);
+            ProcessMouseBounder.Bound(process);
+            boundLbl.Text = "Bound to " + process.ProcessName;
         }
 
         private void unboundBtn_Click(object sender, EventArgs e)
