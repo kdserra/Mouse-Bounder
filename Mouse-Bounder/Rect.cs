@@ -27,22 +27,22 @@ namespace Mouse_Bounder
         
         public Point GetTopLeft()
         {
-            return new Point((int)Left, (int)Top);
+            return new Point(Left, Top);
         }
 
         public Point GetTopRight()
         {
-            return new Point((int)Right, (int)Top);
+            return new Point(Right, Top);
         }
 
         public Point GetBottomLeft()
         {
-            return new Point((int)Left, (int)Bottom);
+            return new Point(Left, Bottom);
         }
 
         public Point GetBottomRight()
         {
-            return new Point((int)Right, (int)Bottom);
+            return new Point(Right, Bottom);
         }
 
         public float GetWidth()
@@ -55,7 +55,7 @@ namespace Mouse_Bounder
             return Bottom - Top;
         }
 
-        public bool Contains(float x, float y)
+        public bool Contains(int x, int y)
         {
             return x >= Left && x <= Right && y >= Top && y <= Bottom;
         }
