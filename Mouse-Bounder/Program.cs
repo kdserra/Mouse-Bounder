@@ -17,7 +17,7 @@ namespace Mouse_Bounder
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ManualModeForm());
+            Application.Run(new AutomaticModeForm());
         }
     }
 }
