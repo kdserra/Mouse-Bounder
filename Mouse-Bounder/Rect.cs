@@ -54,7 +54,7 @@ namespace Mouse_Bounder
         {
             return Bottom - Top;
         }
-        
+
         public bool Contains(float x, float y)
         {
             return x >= Left && x <= Right && y >= Top && y <= Bottom;
