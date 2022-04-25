@@ -36,7 +36,8 @@ namespace Mouse_Bounder
             int? GetProcessID(string processNamePID)
             {
                 if (processNamePID == null) { return null; }
-                // This regex is used to extract the process id from the string.
+                // This regex is matches the process id tag from the string.
+                // Ex: "ProcessName [123]" -> " [123]"
                 string processIDRegex = @" \[[0-9]+\]$";
                 int processID = int.Parse(Regex.Match(processNamePID, processIDRegex).Value.Replace("[", "").Replace("]", ""));
                 return processID;
@@ -93,6 +94,36 @@ namespace Mouse_Bounder
         {
             AboutForm form = new AboutForm();
             form.ShowDialog();
+        }
+
+        private void alwaysOnTopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alwaysOnTopToolStripMenuItem.Checked = !alwaysOnTopToolStripMenuItem.Checked;
+        }
+
+        private void onlyBindWhenAppIsFocusedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            onlyBindWhenAppIsFocusedToolStripMenuItem.Checked = !onlyBindWhenAppIsFocusedToolStripMenuItem.Checked;
+        }
+
+        private void rememberPreviousProcessesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rememberPreviousProcessesToolStripMenuItem.Checked = !rememberPreviousProcessesToolStripMenuItem.Checked;
+        }
+
+        private void autoBindToRememberedProcessesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            autoBindToRememberedProcessesToolStripMenuItem.Checked = !autoBindToRememberedProcessesToolStripMenuItem.Checked;
+        }
+
+        private void resetToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void switchToManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

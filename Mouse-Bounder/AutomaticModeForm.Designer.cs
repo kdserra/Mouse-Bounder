@@ -35,8 +35,8 @@
             this.onlyBindWhenAppIsFocusedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rememberPreviousProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoBindToRememberedProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.switchToManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.switchToManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpBtn = new System.Windows.Forms.ToolStripButton();
             this.aboutBtn = new System.Windows.Forms.ToolStripButton();
             this.processListLbl = new System.Windows.Forms.Label();
@@ -81,36 +81,42 @@
             this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
             this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.alwaysOnTopToolStripMenuItem.Text = "Always on Top";
+            this.alwaysOnTopToolStripMenuItem.Click += new System.EventHandler(this.alwaysOnTopToolStripMenuItem_Click);
             // 
             // onlyBindWhenAppIsFocusedToolStripMenuItem
             // 
             this.onlyBindWhenAppIsFocusedToolStripMenuItem.Name = "onlyBindWhenAppIsFocusedToolStripMenuItem";
             this.onlyBindWhenAppIsFocusedToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.onlyBindWhenAppIsFocusedToolStripMenuItem.Text = "Only Bind When App is Focused";
+            this.onlyBindWhenAppIsFocusedToolStripMenuItem.Click += new System.EventHandler(this.onlyBindWhenAppIsFocusedToolStripMenuItem_Click);
             // 
             // rememberPreviousProcessesToolStripMenuItem
             // 
             this.rememberPreviousProcessesToolStripMenuItem.Name = "rememberPreviousProcessesToolStripMenuItem";
             this.rememberPreviousProcessesToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.rememberPreviousProcessesToolStripMenuItem.Text = "Remember Previous Process";
+            this.rememberPreviousProcessesToolStripMenuItem.Click += new System.EventHandler(this.rememberPreviousProcessesToolStripMenuItem_Click);
             // 
             // autoBindToRememberedProcessesToolStripMenuItem
             // 
             this.autoBindToRememberedProcessesToolStripMenuItem.Name = "autoBindToRememberedProcessesToolStripMenuItem";
             this.autoBindToRememberedProcessesToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.autoBindToRememberedProcessesToolStripMenuItem.Text = "Auto-Bind to Remembered Process";
-            // 
-            // switchToManualToolStripMenuItem
-            // 
-            this.switchToManualToolStripMenuItem.Name = "switchToManualToolStripMenuItem";
-            this.switchToManualToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.switchToManualToolStripMenuItem.Text = "Switch to Manual";
+            this.autoBindToRememberedProcessesToolStripMenuItem.Click += new System.EventHandler(this.autoBindToRememberedProcessesToolStripMenuItem_Click);
             // 
             // resetToDefaultToolStripMenuItem
             // 
             this.resetToDefaultToolStripMenuItem.Name = "resetToDefaultToolStripMenuItem";
             this.resetToDefaultToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.resetToDefaultToolStripMenuItem.Text = "Reset to Default";
+            this.resetToDefaultToolStripMenuItem.Click += new System.EventHandler(this.resetToDefaultToolStripMenuItem_Click);
+            // 
+            // switchToManualToolStripMenuItem
+            // 
+            this.switchToManualToolStripMenuItem.Name = "switchToManualToolStripMenuItem";
+            this.switchToManualToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.switchToManualToolStripMenuItem.Text = "Switch to Manual";
+            this.switchToManualToolStripMenuItem.Click += new System.EventHandler(this.switchToManualToolStripMenuItem_Click);
             // 
             // helpBtn
             // 
