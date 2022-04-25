@@ -25,27 +25,16 @@ namespace Mouse_Bounder
         {
             boundLbl.Text = "Bound to: None";
         }
-
-        private string GetProcessNameWithPID(Process process)
-        {
-            return $"{process.ProcessName} [{process.Id}]";
-        }
         
-        private Process GetProcessFromProcessNameWithPID(string processNamePID)
+        private Process GetProcessFromProcessName(string processName)
         {
-            int? GetProcessID(string processNamePID)
+            Process[] processes = Process.GetProcesses();
+            foreach (Process process in processes)
             {
-                if (processNamePID == null) { return null; }
-                // This regex matches the process id tag from the string.
-                // Ex: "ProcessName [123]" -> " [123]"
-                string processIDRegex = @" \[[0-9]+\]$";
-                int processID = int.Parse(Regex.Match(processNamePID, processIDRegex).Value.Replace("[", "").Replace("]", ""));
-                return processID;
+                if (process.ProcessName != processName) { continue; }
+                return process;
             }
-            int? processID = GetProcessID(processNamePID);
-            if (processID == null) { return null; }
-            Process process = Process.GetProcessById((int)processID);
-            return process;
+            return null;
         }
 
         private void UpdateProcessComboBox()
@@ -56,7 +45,7 @@ namespace Mouse_Bounder
             {
                 if (!String.IsNullOrEmpty(process.MainWindowTitle))
                 {
-                    processListComboBox.Items.Add(GetProcessNameWithPID(process));
+                    processListComboBox.Items.Add(process.ProcessName);
                 }
             }
             processListComboBox.SelectedIndex = 0;
@@ -65,7 +54,7 @@ namespace Mouse_Bounder
         private void boundBtn_Click(object sender, EventArgs e)
         {
             string selection = processListComboBox.Text;
-            Process process = GetProcessFromProcessNameWithPID(selection);
+            Process process = GetProcessFromProcessName(selection);
             if (process == null) { return; }
             ProcessMouseBounder.Bound(process);
             boundLbl.Text = "Bound to " + process.ProcessName;
@@ -74,7 +63,7 @@ namespace Mouse_Bounder
         private void unboundBtn_Click(object sender, EventArgs e)
         {
             string selection = processListComboBox.Text;
-            Process process = GetProcessFromProcessNameWithPID(selection);
+            Process process = GetProcessFromProcessName(selection);
             if (process == null) { return; }
             ProcessMouseBounder.Unbound();
         }
