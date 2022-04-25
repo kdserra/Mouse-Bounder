@@ -88,6 +88,7 @@ namespace Mouse_Bounder
         private void alwaysOnTopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             alwaysOnTopToolStripMenuItem.Checked = !alwaysOnTopToolStripMenuItem.Checked;
+            this.TopMost = alwaysOnTopToolStripMenuItem.Checked;
         }
 
         private void onlyBindWhenAppIsFocusedToolStripMenuItem_Click(object sender, EventArgs e)
