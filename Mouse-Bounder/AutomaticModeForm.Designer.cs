@@ -1,6 +1,6 @@
 ﻿namespace Mouse_Bounder
 {
-    partial class ManualModeForm
+    partial class AutomaticModeForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManualModeForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutomaticModeForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,6 +36,7 @@
             this.rememberPreviousProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoBindToRememberedProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.switchToManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpBtn = new System.Windows.Forms.ToolStripButton();
             this.aboutBtn = new System.Windows.Forms.ToolStripButton();
             this.processListLbl = new System.Windows.Forms.Label();
@@ -67,6 +68,7 @@
             this.onlyBindWhenAppIsFocusedToolStripMenuItem,
             this.rememberPreviousProcessesToolStripMenuItem,
             this.autoBindToRememberedProcessesToolStripMenuItem,
+            this.resetToDefaultToolStripMenuItem,
             this.switchToManualToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -103,6 +105,12 @@
             this.switchToManualToolStripMenuItem.Name = "switchToManualToolStripMenuItem";
             this.switchToManualToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.switchToManualToolStripMenuItem.Text = "Switch to Manual";
+            // 
+            // resetToDefaultToolStripMenuItem
+            // 
+            this.resetToDefaultToolStripMenuItem.Name = "resetToDefaultToolStripMenuItem";
+            this.resetToDefaultToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.resetToDefaultToolStripMenuItem.Text = "Reset to Default";
             // 
             // helpBtn
             // 
@@ -182,7 +190,7 @@
             this.boundLbl.Text = "Bound to: None";
             this.boundLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ManualModeForm
+            // AutomaticModeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -197,7 +205,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "ManualModeForm";
+            this.Name = "AutomaticModeForm";
             this.Text = "Mouse Bounder";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -223,5 +231,6 @@
         private System.Windows.Forms.ToolStripMenuItem switchToManualToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton helpBtn;
         private System.Windows.Forms.ToolStripButton aboutBtn;
+        private System.Windows.Forms.ToolStripMenuItem resetToDefaultToolStripMenuItem;
     }
 }
