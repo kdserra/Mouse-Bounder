@@ -87,7 +87,7 @@
             // 
             this.onlyBindWhenAppIsFocusedToolStripMenuItem.Name = "onlyBindWhenAppIsFocusedToolStripMenuItem";
             this.onlyBindWhenAppIsFocusedToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.onlyBindWhenAppIsFocusedToolStripMenuItem.Text = "Only Bind When App is Focused";
+            this.onlyBindWhenAppIsFocusedToolStripMenuItem.Text = "Only Bound When Focused";
             this.onlyBindWhenAppIsFocusedToolStripMenuItem.Click += new System.EventHandler(this.onlyBindWhenAppIsFocusedToolStripMenuItem_Click);
             // 
             // rememberPreviousProcessesToolStripMenuItem
@@ -211,6 +211,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AutomaticModeForm";
             this.Text = "Mouse Bounder";
             this.toolStrip1.ResumeLayout(false);
