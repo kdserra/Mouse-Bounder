@@ -20,6 +20,18 @@ namespace Mouse_Bounder
             ProcessMouseBounder.OnUnbound += OnUnbound;
             ProcessMouseBounder.OnBoundRegainedFocus += OnBoundRegainedFocus;
             ProcessMouseBounder.OnBoundLostFocus += OnBoundLostFocus;
+            HandleAutoBound();
+        }
+
+        private void HandleAutoBound()
+        {
+            if (autoBindToRememberedProcessesToolStripMenuItem.Checked)
+            {
+                string selection = processListComboBox.Text;
+                Process process = GetProcessFromProcessName(selection);
+                if (process == null) { return; }
+                ProcessMouseBounder.Bound(process);
+            }
         }
 
         private void ResetToDefault()
@@ -70,7 +82,6 @@ namespace Mouse_Bounder
 
         private void OnUnbound()
         {
-            Debug.WriteLine("OnUnbound");
             this.Text = "Mouse Bounder";
             boundLbl.Text = "Bound to: None";
             toolStrip1.Enabled = true;
@@ -81,13 +92,11 @@ namespace Mouse_Bounder
 
         private void OnBoundRegainedFocus()
         {
-            Debug.WriteLine("OnBoundRegainedFocus");
             this.Text = "Mouse Bounder [Bound]";
         }
 
         private void OnBoundLostFocus()
         {
-            Debug.WriteLine("OnBoundLostFocus");
             this.Text = "Mouse Bounder [Paused]";
         }
 
@@ -181,11 +190,6 @@ namespace Mouse_Bounder
         private void resetToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ResetToDefault();
-        }
-
-        private void switchToManualToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
