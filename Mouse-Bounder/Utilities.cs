@@ -32,6 +32,9 @@ namespace Mouse_Bounder
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern Int32 GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
+        [DllImport("user32.dll")]
+        public static extern bool IsIconic(IntPtr Hwnd);
+
         /// <summary>
         /// Fetches window rect.
         /// Returns null if the window is not found.
@@ -101,6 +104,14 @@ namespace Mouse_Bounder
         public static void FocusProcess(Process process)
         {
             SetForegroundWindow(process.MainWindowHandle);
+        }
+
+        /// <summary>
+        /// Checks if the process is minimized.
+        /// </summary>
+        public static bool IsMinimized(Process process)
+        {
+            return IsIconic(process.MainWindowHandle);
         }
     }
 }
