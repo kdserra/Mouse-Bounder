@@ -6,7 +6,7 @@ namespace Mouse_Bounder
 {
     public class Utilities
     {
-        private static Rect m_BorderRect = new Rect(-7, 0, 7, 7);
+        private static readonly Rect m_BorderRectFrame = new Rect(-7, 0, 7, 7);
         
         [StructLayout(LayoutKind.Sequential)]
         private struct RECT
@@ -22,6 +22,15 @@ namespace Mouse_Bounder
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool GetWindowRect(IntPtr hWnd, ref RECT Rect);
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern Int32 GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
         /// <summary>
         /// Fetches window rect.
@@ -45,13 +54,53 @@ namespace Mouse_Bounder
         {
             if (process == null) { return null; }
             RECT rect = new RECT();
-            IntPtr hwnd = FindWindow(null, process.MainWindowTitle);
-            bool state = GetWindowRect(hwnd, ref rect);
+            bool state = GetWindowRect(process.MainWindowHandle, ref rect);
             if (!state) { return null; }
-            return new Rect(rect.left   - m_BorderRect.Left,
-                            rect.top    - m_BorderRect.Top,
-                            rect.right  - m_BorderRect.Right,
-                            rect.bottom - m_BorderRect.Bottom);
+            return new Rect(rect.left   - m_BorderRectFrame.Left,
+                            rect.top    - m_BorderRectFrame.Top,
+                            rect.right  - m_BorderRectFrame.Right,
+                            rect.bottom - m_BorderRectFrame.Bottom);
+        }
+
+        /// <summary>
+        /// Fetch the current focused process, or null if it doesn't exist.
+        /// Returns true if the process is found, otherwise false.
+        /// </summary>
+        private static bool GetCurrentFocusedProcess(out Process focusedProcess)
+        {
+            IntPtr hwnd = GetForegroundWindow();
+            if (hwnd == IntPtr.Zero) { focusedProcess = null; return false; }
+            uint processID;
+            GetWindowThreadProcessId(hwnd, out processID);
+            foreach (Process process in Process.GetProcesses())
+            {
+                if (process.Id == processID)
+                {
+                    focusedProcess = process;
+                    return true;
+                }
+            }
+            focusedProcess = null;
+            return false;
+        }
+
+        /// <summary>
+        /// Fetches the focused status of a process.
+        /// Returns true if the process is focused, otherwise false.
+        /// </summary>
+        public static bool IsProcessFocused(Process process)
+        {
+            Process focusedProcess;
+            if (!GetCurrentFocusedProcess(out focusedProcess)) { return false; }
+            return (focusedProcess.Id == process.Id);
+        }
+
+        /// <summary>
+        /// Sets the process to be focused.
+        /// </summary>
+        public static void FocusProcess(Process process)
+        {
+            SetForegroundWindow(process.MainWindowHandle);
         }
     }
 }
