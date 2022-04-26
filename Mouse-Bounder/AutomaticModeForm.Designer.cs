@@ -36,7 +36,6 @@
             this.rememberPreviousProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoBindToRememberedProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.switchToManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpBtn = new System.Windows.Forms.ToolStripButton();
             this.aboutBtn = new System.Windows.Forms.ToolStripButton();
             this.processListLbl = new System.Windows.Forms.Label();
@@ -68,8 +67,7 @@
             this.onlyBindWhenAppIsFocusedToolStripMenuItem,
             this.rememberPreviousProcessesToolStripMenuItem,
             this.autoBindToRememberedProcessesToolStripMenuItem,
-            this.resetToDefaultToolStripMenuItem,
-            this.switchToManualToolStripMenuItem});
+            this.resetToDefaultToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -110,13 +108,6 @@
             this.resetToDefaultToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.resetToDefaultToolStripMenuItem.Text = "Reset to Default";
             this.resetToDefaultToolStripMenuItem.Click += new System.EventHandler(this.resetToDefaultToolStripMenuItem_Click);
-            // 
-            // switchToManualToolStripMenuItem
-            // 
-            this.switchToManualToolStripMenuItem.Name = "switchToManualToolStripMenuItem";
-            this.switchToManualToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.switchToManualToolStripMenuItem.Text = "Switch to Manual";
-            this.switchToManualToolStripMenuItem.Click += new System.EventHandler(this.switchToManualToolStripMenuItem_Click);
             // 
             // helpBtn
             // 
@@ -235,7 +226,6 @@
         private System.Windows.Forms.ToolStripMenuItem onlyBindWhenAppIsFocusedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rememberPreviousProcessesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoBindToRememberedProcessesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem switchToManualToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton helpBtn;
         private System.Windows.Forms.ToolStripButton aboutBtn;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultToolStripMenuItem;
