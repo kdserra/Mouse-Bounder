@@ -85,20 +85,23 @@ namespace Mouse_Bounder
 
         private static void HandleProcessFocusEvents(bool isFocused)
         {
-            if (m_WaitingToRegainFocus)
+            if (BoundWhenFocused)
             {
-                if (isFocused)
+                if (m_WaitingToRegainFocus)
                 {
-                    m_WaitingToRegainFocus = false;
-                    OnBoundRegainedFocus?.Invoke();
+                    if (isFocused)
+                    {
+                        m_WaitingToRegainFocus = false;
+                        OnBoundRegainedFocus?.Invoke();
+                    }
                 }
-            }
-            else
-            {
-                if (!isFocused)
+                else
                 {
-                    m_WaitingToRegainFocus = true;
-                    OnBoundLostFocus?.Invoke();
+                    if (!isFocused)
+                    {
+                        m_WaitingToRegainFocus = true;
+                        OnBoundLostFocus?.Invoke();
+                    }
                 }
             }
         }
@@ -108,8 +111,8 @@ namespace Mouse_Bounder
             switch (m_CurrentBoundMode)
             {
                 case BoundMode.Process:
-                    if (SelectedBoundProcess == null) { Debug.WriteLine("unbounding 1"); Unbound(); return; }
-                    if (SelectedBoundProcess.HasExited) { Debug.WriteLine("unbounding 2"); Unbound(); return; }
+                    if (SelectedBoundProcess == null) { Unbound(); return; }
+                    if (SelectedBoundProcess.HasExited) { Unbound(); return; }
                     bool isFocused = Utilities.IsProcessFocused(SelectedBoundProcess);
                     HandleProcessFocusEvents(isFocused);
                     if (BoundWhenFocused && !isFocused) { return; }
