@@ -6,25 +6,33 @@ The noted changes will be purely package related changes between releases, and d
 
 ## [Unreleased]
 
+## [2.0.0] - 2022-04-25
+
 ### Added
 
-- Mouse Bounder is now exported as a portable executable.
 - Added process list filtering to remove processes without windows.
 - Mouse binding now uses hooks to prevent mouse from leaving bounds.
 - Options now automatically save when selected.
-- Added minimize button to the main window.
 
 ### Removed
 
 - Removed border offset setting.
+- Removed Process ID from Process list.
+- Removed Manual Mode.
 
 ### Changed
 
-- Changelog changed retroactively to adhere to [keepachangelog](https://keepachangelog.com/en/1.0.0/).
+- Mouse Bounder is now exported as a portable executable.
+- Changelog changed to adhere to [KeepAChangeLog](https://keepachangelog.com).
 - Options are now located in a dropdown menu.
 - About is now located in the toolbar.
 - Updated Help Window UI.
 - Updated Process List Auto-Completion.
+
+### Fixed
+
+- Fixed bug with mouse temporarily leaving bounds if you move quickly.
+- Fixed bug with minimizing causing mouse to get stuck.
 
 ## [1.2.2] - 2022-01-23
 
@@ -130,7 +138,8 @@ If your on a 64 bit PC use x64, if your on 32 bit use x86.
 
 Initial release
 
-[Unreleased]: https://github.com/kdserra/Unity-Project-Structure/compare/v1.2.2...dev
+[Unreleased]: https://github.com/kdserra/Unity-Project-Structure/compare/v2.0.0...dev
+[2.0.0]: https://github.com/kdserra/Unity-Project-Structure/releases/tag/v2.0.0
 [1.2.2]: https://github.com/kdserra/Unity-Project-Structure/releases/tag/v1.2.2
 [1.2.1]: https://github.com/kdserra/Unity-Project-Structure/releases/tag/v1.2.1
 [1.2.0]: https://github.com/kdserra/Unity-Project-Structure/releases/tag/v1.2.0
