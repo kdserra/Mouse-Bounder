@@ -113,6 +113,7 @@ namespace Mouse_Bounder
                 case BoundMode.Process:
                     if (SelectedBoundProcess == null) { Unbound(); return; }
                     if (SelectedBoundProcess.HasExited) { Unbound(); return; }
+                    if (Utilities.IsMinimized(SelectedBoundProcess)) { Unbound(); return; }
                     bool isFocused = Utilities.IsProcessFocused(SelectedBoundProcess);
                     HandleProcessFocusEvents(isFocused);
                     if (BoundWhenFocused && !isFocused) { return; }
