@@ -1,4 +1,3 @@
-
 # Mouse Bounder
 
 <p align="center">
@@ -27,7 +26,7 @@ C# Windows Form Application
 Target Framework
 .NET Core 3.1 (Long-term support)
 
-Built using Visual Studio 2019
+Built using Visual Studio 2022
 
 # Credits
 
