@@ -19,6 +19,10 @@
 
 The refresh button will update the process list.
 
+# Download
+
+Head to the [Releases](https://github.com/kdserra/Mouse-Bounder/releases).
+
 # Build Information
 
 C# Windows Form Application
