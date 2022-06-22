@@ -55,7 +55,7 @@ namespace Mouse_Bounder
             m_BoundRect = (Rect)boundRect;
             Subscribe();
             IsBound = true;
-            Cursor.Position = BoundPosition(Cursor.Position, m_BoundRect);
+            Cursor.Position = m_BoundRect.Bound(Cursor.Position);
             OnBound?.Invoke();
             m_CurrentBoundMode = BoundMode.Process;
         }
@@ -66,7 +66,7 @@ namespace Mouse_Bounder
             m_BoundRect = rect;
             Subscribe();
             IsBound = true;
-            Cursor.Position = BoundPosition(Cursor.Position, m_BoundRect);
+            Cursor.Position = m_BoundRect.Bound(Cursor.Position);
             OnBound?.Invoke();
             m_CurrentBoundMode = BoundMode.Rect;
         }
@@ -127,18 +127,8 @@ namespace Mouse_Bounder
                     return;
             }
             if (m_BoundRect.Contains(e.Location)) { return; }
-            Cursor.Position = BoundPosition(e.Location, m_BoundRect);
+            Cursor.Position = m_BoundRect.Bound(e.Location);
             e.Handled = true;
-        }
-
-        private static Point BoundPosition(Point position, Rect boundRect)
-        {
-            if (boundRect.Contains(position)) { return position; }
-            if (position.X < boundRect.Left) { position = new Point(boundRect.Left, position.Y); }
-            else if (position.X > boundRect.Right) { position = new Point(boundRect.Right, position.Y); }
-            if (position.Y < boundRect.Top) { position = new Point(position.X, boundRect.Top); }
-            else if (position.Y > boundRect.Bottom) { position = new Point(position.X, boundRect.Bottom); }
-            return position;
         }
 
         private static void Subscribe()
