@@ -112,14 +112,40 @@ namespace Mouse_Bounder
             switch (m_CurrentBoundMode)
             {
                 case BoundMode.Process:
-                    if (SelectedBoundProcess == null) { Unbound(); return; }
-                    if (SelectedBoundProcess.HasExited) { Unbound(); return; }
-                    if (Utilities.IsMinimized(SelectedBoundProcess)) { Unbound(); return; }
+                    if (SelectedBoundProcess == null)
+                    {
+                        Unbound();
+                        return;
+                    }
+
+                    if (SelectedBoundProcess.HasExited)
+                    {
+                        Unbound();
+                        return;
+                    }
+
+                    if (!BoundWhenFocused && Utilities.IsMinimized(SelectedBoundProcess))
+                    {
+                        Unbound();
+                        return;
+                    }
+
                     bool isFocused = Utilities.IsProcessFocused(SelectedBoundProcess);
                     HandleProcessFocusEvents(isFocused);
-                    if (BoundWhenFocused && !isFocused) { return; }
+
+                    if (BoundWhenFocused && !isFocused)
+                    {
+                        return;
+                    }
+
                     Rect? windowRect = Utilities.GetAdjustedWindowRect(SelectedBoundProcess);
-                    if (windowRect == null) { Unbound(); return; }
+
+                    if (windowRect == null)
+                    {
+                        Unbound();
+                        return;
+                    }
+
                     m_BoundRect = (Rect)windowRect;
                     break;
                 case BoundMode.Rect:
@@ -127,7 +153,12 @@ namespace Mouse_Bounder
                 default:
                     return;
             }
-            if (m_BoundRect.Contains(e.Location)) { return; }
+
+            if (m_BoundRect.Contains(e.Location))
+            {
+                return;
+            }
+
             Cursor.Position = m_BoundRect.Bound(e.Location);
             e.Handled = true;
         }

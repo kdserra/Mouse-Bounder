@@ -6,6 +6,10 @@ The noted changes will be purely package related changes between releases, and d
 
 ## [Unreleased]
 
+### Updated
+
+- Updated "Only Bound When Focused" to pause on minimize.
+
 ### Removed
 
 - Removed Tool Tips from Tool Bar
