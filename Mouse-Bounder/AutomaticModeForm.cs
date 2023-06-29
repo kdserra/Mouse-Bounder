@@ -11,6 +11,7 @@ namespace Mouse_Bounder
         public const bool DEFAULT_REMEMBER_PREVIOUS_PROCESSES = false;
         public const string DEFAULT_PROCESS_NAME = "";
         public const bool DEFAULT_AUTO_BIND_TO_REMEMBERED_PROCESSES = false;
+
         public AutomaticModeForm()
         {
             InitializeComponent();
@@ -78,7 +79,7 @@ namespace Mouse_Bounder
 
             if (process != null)
             {
-                boundLbl.SafeInvoke(() => { boundLbl.Text = $"Bound to: {process.ProcessName}"; });
+                SafeInvoke(() => { boundLbl.Text = $"Bound to: {process.ProcessName}"; });
             }
             else
             {
@@ -86,19 +87,25 @@ namespace Mouse_Bounder
                 return;
             }
 
-            toolStrip1.Enabled = false;
-            processListComboBox.Enabled = false;
-            boundBtn.Enabled = false;
-            refreshBtn.Enabled = false;
+            SafeInvoke(() =>
+            {
+                toolStrip1.Enabled = false;
+                processListComboBox.Enabled = false;
+                boundBtn.Enabled = false;
+                refreshBtn.Enabled = false;
+            });
         }
 
         private void OnUnbound()
         {
-            boundLbl.SafeInvoke(() => { boundLbl.Text = "Bound to: None"; });
-            toolStrip1.Enabled = true;
-            processListComboBox.Enabled = true;
-            boundBtn.Enabled = true;
-            refreshBtn.Enabled = true;
+            SafeInvoke(() =>
+            {
+                boundLbl.Text = "Bound to: None";
+                toolStrip1.Enabled = true;
+                processListComboBox.Enabled = true;
+                boundBtn.Enabled = true;
+                refreshBtn.Enabled = true;
+            });
         }
 
         private void OnBoundRegainedFocus()
@@ -111,7 +118,7 @@ namespace Mouse_Bounder
                 return;
             }
 
-            boundLbl.SafeInvoke(() => { boundLbl.Text = $"Bound to: {process.ProcessName}"; });
+            SafeInvoke(() => { boundLbl.Text = $"Bound to: {process.ProcessName}"; });
         }
 
         private void OnBoundLostFocus()
@@ -124,7 +131,7 @@ namespace Mouse_Bounder
                 return;
             }
 
-            boundLbl.SafeInvoke(() => { boundLbl.Text = $"Bound to: {process.ProcessName} [Paused]"; });
+            SafeInvoke(() => { boundLbl.Text = $"Bound to: {process.ProcessName} [Paused]"; });
         }
 
         private Process GetProcessFromProcessName(string processName)
@@ -192,16 +199,22 @@ namespace Mouse_Bounder
 
         private void helpBtn_Click(object sender, EventArgs e)
         {
-            HelpForm form = new HelpForm();
-            form.TopMost = alwaysOnTopToolStripMenuItem.Checked;
-            form.ShowDialog();
+            SafeInvoke(() =>
+            {
+                HelpForm form = new HelpForm();
+                form.TopMost = alwaysOnTopToolStripMenuItem.Checked;
+                form.ShowDialog();
+            });
         }
 
         private void aboutBtn_Click(object sender, EventArgs e)
         {
-            AboutForm form = new AboutForm();
-            form.TopMost = alwaysOnTopToolStripMenuItem.Checked;
-            form.ShowDialog();
+            SafeInvoke(() =>
+            {
+                AboutForm form = new AboutForm();
+                form.TopMost = alwaysOnTopToolStripMenuItem.Checked;
+                form.ShowDialog();
+            });
         }
 
         private void alwaysOnTopToolStripMenuItem_Click(object sender, EventArgs e)
@@ -233,6 +246,22 @@ namespace Mouse_Bounder
         private void resetToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ResetToDefault();
+        }
+
+
+        /// <summary>
+        /// Safely sets the state of a control by marshaling the operation to the UI thread if necessary.
+        /// </summary>
+        private void SafeInvoke(Action action)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(action);
+            }
+            else
+            {
+                action();
+            }
         }
     }
 }
