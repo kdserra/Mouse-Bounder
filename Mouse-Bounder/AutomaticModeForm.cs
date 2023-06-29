@@ -74,8 +74,6 @@ namespace Mouse_Bounder
 
         private void OnBound()
         {
-            Debug.WriteLine("OnBound");
-            this.Text = "Mouse Bounder [Bound]";
             Process process = ProcessMouseBounder.SelectedBoundProcess;
 
             if (process != null)
@@ -84,7 +82,8 @@ namespace Mouse_Bounder
             }
             else
             {
-                boundLbl.Text = "Bound to: (null)";
+                ProcessMouseBounder.Unbound();
+                return;
             }
 
             toolStrip1.Enabled = false;
@@ -95,7 +94,6 @@ namespace Mouse_Bounder
 
         private void OnUnbound()
         {
-            this.Text = "Mouse Bounder";
             boundLbl.Text = "Bound to: None";
             toolStrip1.Enabled = true;
             processListComboBox.Enabled = true;
@@ -105,12 +103,28 @@ namespace Mouse_Bounder
 
         private void OnBoundRegainedFocus()
         {
-            this.Text = "Mouse Bounder [Bound]";
+            Process process = ProcessMouseBounder.SelectedBoundProcess;
+
+            if (process == null)
+            {
+                ProcessMouseBounder.Unbound();
+                return;
+            }
+
+            boundLbl.Text = $"Bound to: {process.ProcessName}";
         }
 
         private void OnBoundLostFocus()
         {
-            this.Text = "Mouse Bounder [Paused]";
+            Process process = ProcessMouseBounder.SelectedBoundProcess;
+
+            if (process == null)
+            {
+                ProcessMouseBounder.Unbound();
+                return;
+            }
+
+            boundLbl.Text = $"Bound to: {process.ProcessName} [Paused]";
         }
 
         private Process GetProcessFromProcessName(string processName)

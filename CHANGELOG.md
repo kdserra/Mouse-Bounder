@@ -9,9 +9,11 @@ The noted changes will be purely package related changes between releases, and d
 ### Updated
 
 - Updated "Only Bound When Focused" to pause on minimize.
+- Updated bound status text to indicate paused state
 
 ### Removed
 
+- Removed bound status from window titlebar
 - Removed Tool Tips from Tool Bar
 
 ## [2.1.0] - 2023-06-29
