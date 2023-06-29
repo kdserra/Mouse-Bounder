@@ -28,6 +28,6 @@ Head to the [Releases](https://github.com/kdserra/Mouse-Bounder/releases).
 C# Windows Form Application
 
 Target Framework
-.NET Core 3.1 (Long-term support)
+.NET 7
 
 Built using Visual Studio 2022
