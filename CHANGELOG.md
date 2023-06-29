@@ -6,9 +6,21 @@ The noted changes will be purely package related changes between releases, and d
 
 ## [Unreleased]
 
+## [2.1.0] - 2023-06-29
+
 ### Added
 
 - Added Switch to Process on Bound
+- Added Windows ARM Processor Support
+
+### Updated
+
+- No longer requires .NET installation for use
+- Updated to be standalone portable file
+
+### Fixed
+
+- Fixed missing file icon
 
 ## [2.0.0] - 2022-04-25
 
@@ -142,7 +154,8 @@ If your on a 64 bit PC use x64, if your on 32 bit use x86.
 
 Initial release
 
-[Unreleased]: https://github.com/kdserra/Mouse-Bounder/compare/v2.0.0...dev
+[Unreleased]: https://github.com/kdserra/Mouse-Bounder/compare/v2.1.0...dev
+[2.1.0]: https://github.com/kdserra/Mouse-Bounder/releases/tag/v2.1.0
 [2.0.0]: https://github.com/kdserra/Mouse-Bounder/releases/tag/v2.0.0
 [1.2.2]: https://github.com/kdserra/Mouse-Bounder/releases/tag/v1.2.2
 [1.2.1]: https://github.com/kdserra/Mouse-Bounder/releases/tag/v1.2.1
