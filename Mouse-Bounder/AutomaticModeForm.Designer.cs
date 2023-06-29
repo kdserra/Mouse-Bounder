@@ -29,186 +29,178 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AutomaticModeForm));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.onlyBindWhenAppIsFocusedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rememberPreviousProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.autoBindToRememberedProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpBtn = new System.Windows.Forms.ToolStripButton();
-            this.aboutBtn = new System.Windows.Forms.ToolStripButton();
-            this.processListLbl = new System.Windows.Forms.Label();
-            this.processListComboBox = new System.Windows.Forms.ComboBox();
-            this.boundBtn = new System.Windows.Forms.Button();
-            this.unboundBtn = new System.Windows.Forms.Button();
-            this.refreshBtn = new System.Windows.Forms.Button();
-            this.boundLbl = new System.Windows.Forms.Label();
-            this.toolStrip1.SuspendLayout();
-            this.SuspendLayout();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            alwaysOnTopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            onlyBindWhenAppIsFocusedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            rememberPreviousProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            autoBindToRememberedProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            resetToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            helpBtn = new System.Windows.Forms.ToolStripButton();
+            aboutBtn = new System.Windows.Forms.ToolStripButton();
+            processListLbl = new System.Windows.Forms.Label();
+            processListComboBox = new System.Windows.Forms.ComboBox();
+            boundBtn = new System.Windows.Forms.Button();
+            unboundBtn = new System.Windows.Forms.Button();
+            refreshBtn = new System.Windows.Forms.Button();
+            boundLbl = new System.Windows.Forms.Label();
+            toolStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1,
-            this.helpBtn,
-            this.aboutBtn});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(264, 25);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1, helpBtn, aboutBtn });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.ShowItemToolTips = false;
+            toolStrip1.Size = new System.Drawing.Size(264, 25);
+            toolStrip1.TabIndex = 0;
+            toolStrip1.Text = "toolStrip1";
             // 
             // toolStripDropDownButton1
             // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alwaysOnTopToolStripMenuItem,
-            this.onlyBindWhenAppIsFocusedToolStripMenuItem,
-            this.rememberPreviousProcessesToolStripMenuItem,
-            this.autoBindToRememberedProcessesToolStripMenuItem,
-            this.resetToDefaultToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(62, 22);
-            this.toolStripDropDownButton1.Text = "Options";
+            toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { alwaysOnTopToolStripMenuItem, onlyBindWhenAppIsFocusedToolStripMenuItem, rememberPreviousProcessesToolStripMenuItem, autoBindToRememberedProcessesToolStripMenuItem, resetToDefaultToolStripMenuItem });
+            toolStripDropDownButton1.Image = (System.Drawing.Image)resources.GetObject("toolStripDropDownButton1.Image");
+            toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            toolStripDropDownButton1.Size = new System.Drawing.Size(62, 22);
+            toolStripDropDownButton1.Text = "Options";
             // 
             // alwaysOnTopToolStripMenuItem
             // 
-            this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
-            this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.alwaysOnTopToolStripMenuItem.Text = "Always on Top";
-            this.alwaysOnTopToolStripMenuItem.Click += new System.EventHandler(this.alwaysOnTopToolStripMenuItem_Click);
+            alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
+            alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            alwaysOnTopToolStripMenuItem.Text = "Always on Top";
+            alwaysOnTopToolStripMenuItem.Click += alwaysOnTopToolStripMenuItem_Click;
             // 
             // onlyBindWhenAppIsFocusedToolStripMenuItem
             // 
-            this.onlyBindWhenAppIsFocusedToolStripMenuItem.Name = "onlyBindWhenAppIsFocusedToolStripMenuItem";
-            this.onlyBindWhenAppIsFocusedToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.onlyBindWhenAppIsFocusedToolStripMenuItem.Text = "Only Bound When Focused";
-            this.onlyBindWhenAppIsFocusedToolStripMenuItem.Click += new System.EventHandler(this.onlyBindWhenAppIsFocusedToolStripMenuItem_Click);
+            onlyBindWhenAppIsFocusedToolStripMenuItem.Name = "onlyBindWhenAppIsFocusedToolStripMenuItem";
+            onlyBindWhenAppIsFocusedToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            onlyBindWhenAppIsFocusedToolStripMenuItem.Text = "Only Bound When Focused";
+            onlyBindWhenAppIsFocusedToolStripMenuItem.Click += onlyBindWhenAppIsFocusedToolStripMenuItem_Click;
             // 
             // rememberPreviousProcessesToolStripMenuItem
             // 
-            this.rememberPreviousProcessesToolStripMenuItem.Name = "rememberPreviousProcessesToolStripMenuItem";
-            this.rememberPreviousProcessesToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.rememberPreviousProcessesToolStripMenuItem.Text = "Remember Previous Process";
-            this.rememberPreviousProcessesToolStripMenuItem.Click += new System.EventHandler(this.rememberPreviousProcessesToolStripMenuItem_Click);
+            rememberPreviousProcessesToolStripMenuItem.Name = "rememberPreviousProcessesToolStripMenuItem";
+            rememberPreviousProcessesToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            rememberPreviousProcessesToolStripMenuItem.Text = "Remember Previous Process";
+            rememberPreviousProcessesToolStripMenuItem.Click += rememberPreviousProcessesToolStripMenuItem_Click;
             // 
             // autoBindToRememberedProcessesToolStripMenuItem
             // 
-            this.autoBindToRememberedProcessesToolStripMenuItem.Name = "autoBindToRememberedProcessesToolStripMenuItem";
-            this.autoBindToRememberedProcessesToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.autoBindToRememberedProcessesToolStripMenuItem.Text = "Auto-Bind to Remembered Process";
-            this.autoBindToRememberedProcessesToolStripMenuItem.Click += new System.EventHandler(this.autoBindToRememberedProcessesToolStripMenuItem_Click);
+            autoBindToRememberedProcessesToolStripMenuItem.Name = "autoBindToRememberedProcessesToolStripMenuItem";
+            autoBindToRememberedProcessesToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            autoBindToRememberedProcessesToolStripMenuItem.Text = "Auto-Bind to Remembered Process";
+            autoBindToRememberedProcessesToolStripMenuItem.Click += autoBindToRememberedProcessesToolStripMenuItem_Click;
             // 
             // resetToDefaultToolStripMenuItem
             // 
-            this.resetToDefaultToolStripMenuItem.Name = "resetToDefaultToolStripMenuItem";
-            this.resetToDefaultToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.resetToDefaultToolStripMenuItem.Text = "Reset to Default";
-            this.resetToDefaultToolStripMenuItem.Click += new System.EventHandler(this.resetToDefaultToolStripMenuItem_Click);
+            resetToDefaultToolStripMenuItem.Name = "resetToDefaultToolStripMenuItem";
+            resetToDefaultToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            resetToDefaultToolStripMenuItem.Text = "Reset to Default";
+            resetToDefaultToolStripMenuItem.Click += resetToDefaultToolStripMenuItem_Click;
             // 
             // helpBtn
             // 
-            this.helpBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.helpBtn.Image = ((System.Drawing.Image)(resources.GetObject("helpBtn.Image")));
-            this.helpBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.helpBtn.Name = "helpBtn";
-            this.helpBtn.Size = new System.Drawing.Size(36, 22);
-            this.helpBtn.Text = "Help";
-            this.helpBtn.Click += new System.EventHandler(this.helpBtn_Click);
+            helpBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            helpBtn.Image = (System.Drawing.Image)resources.GetObject("helpBtn.Image");
+            helpBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            helpBtn.Name = "helpBtn";
+            helpBtn.Size = new System.Drawing.Size(36, 22);
+            helpBtn.Text = "Help";
+            helpBtn.Click += helpBtn_Click;
             // 
             // aboutBtn
             // 
-            this.aboutBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.aboutBtn.Image = ((System.Drawing.Image)(resources.GetObject("aboutBtn.Image")));
-            this.aboutBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.aboutBtn.Name = "aboutBtn";
-            this.aboutBtn.Size = new System.Drawing.Size(44, 22);
-            this.aboutBtn.Text = "About";
-            this.aboutBtn.Click += new System.EventHandler(this.aboutBtn_Click);
+            aboutBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            aboutBtn.Image = (System.Drawing.Image)resources.GetObject("aboutBtn.Image");
+            aboutBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            aboutBtn.Name = "aboutBtn";
+            aboutBtn.Size = new System.Drawing.Size(44, 22);
+            aboutBtn.Text = "About";
+            aboutBtn.Click += aboutBtn_Click;
             // 
             // processListLbl
             // 
-            this.processListLbl.AutoSize = true;
-            this.processListLbl.Location = new System.Drawing.Point(12, 25);
-            this.processListLbl.Name = "processListLbl";
-            this.processListLbl.Size = new System.Drawing.Size(68, 15);
-            this.processListLbl.TabIndex = 1;
-            this.processListLbl.Text = "Process List";
+            processListLbl.AutoSize = true;
+            processListLbl.Location = new System.Drawing.Point(12, 25);
+            processListLbl.Name = "processListLbl";
+            processListLbl.Size = new System.Drawing.Size(68, 15);
+            processListLbl.TabIndex = 1;
+            processListLbl.Text = "Process List";
             // 
             // processListComboBox
             // 
-            this.processListComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.processListComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.processListComboBox.FormattingEnabled = true;
-            this.processListComboBox.Location = new System.Drawing.Point(12, 43);
-            this.processListComboBox.Name = "processListComboBox";
-            this.processListComboBox.Size = new System.Drawing.Size(237, 23);
-            this.processListComboBox.TabIndex = 2;
+            processListComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            processListComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            processListComboBox.FormattingEnabled = true;
+            processListComboBox.Location = new System.Drawing.Point(12, 43);
+            processListComboBox.Name = "processListComboBox";
+            processListComboBox.Size = new System.Drawing.Size(237, 23);
+            processListComboBox.TabIndex = 2;
             // 
             // boundBtn
             // 
-            this.boundBtn.Location = new System.Drawing.Point(12, 76);
-            this.boundBtn.Name = "boundBtn";
-            this.boundBtn.Size = new System.Drawing.Size(75, 23);
-            this.boundBtn.TabIndex = 3;
-            this.boundBtn.Text = "Bound";
-            this.boundBtn.UseVisualStyleBackColor = true;
-            this.boundBtn.Click += new System.EventHandler(this.boundBtn_Click);
+            boundBtn.Location = new System.Drawing.Point(12, 76);
+            boundBtn.Name = "boundBtn";
+            boundBtn.Size = new System.Drawing.Size(75, 23);
+            boundBtn.TabIndex = 3;
+            boundBtn.Text = "Bound";
+            boundBtn.UseVisualStyleBackColor = true;
+            boundBtn.Click += boundBtn_Click;
             // 
             // unboundBtn
             // 
-            this.unboundBtn.Location = new System.Drawing.Point(93, 76);
-            this.unboundBtn.Name = "unboundBtn";
-            this.unboundBtn.Size = new System.Drawing.Size(75, 23);
-            this.unboundBtn.TabIndex = 4;
-            this.unboundBtn.Text = "Unbound";
-            this.unboundBtn.UseVisualStyleBackColor = true;
-            this.unboundBtn.Click += new System.EventHandler(this.unboundBtn_Click);
+            unboundBtn.Location = new System.Drawing.Point(93, 76);
+            unboundBtn.Name = "unboundBtn";
+            unboundBtn.Size = new System.Drawing.Size(75, 23);
+            unboundBtn.TabIndex = 4;
+            unboundBtn.Text = "Unbound";
+            unboundBtn.UseVisualStyleBackColor = true;
+            unboundBtn.Click += unboundBtn_Click;
             // 
             // refreshBtn
             // 
-            this.refreshBtn.Location = new System.Drawing.Point(174, 76);
-            this.refreshBtn.Name = "refreshBtn";
-            this.refreshBtn.Size = new System.Drawing.Size(75, 23);
-            this.refreshBtn.TabIndex = 5;
-            this.refreshBtn.Text = "Refresh";
-            this.refreshBtn.UseVisualStyleBackColor = true;
-            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            refreshBtn.Location = new System.Drawing.Point(174, 76);
+            refreshBtn.Name = "refreshBtn";
+            refreshBtn.Size = new System.Drawing.Size(75, 23);
+            refreshBtn.TabIndex = 5;
+            refreshBtn.Text = "Refresh";
+            refreshBtn.UseVisualStyleBackColor = true;
+            refreshBtn.Click += refreshBtn_Click;
             // 
             // boundLbl
             // 
-            this.boundLbl.Location = new System.Drawing.Point(12, 104);
-            this.boundLbl.Name = "boundLbl";
-            this.boundLbl.Size = new System.Drawing.Size(237, 15);
-            this.boundLbl.TabIndex = 6;
-            this.boundLbl.Text = "Bound to: None";
-            this.boundLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            boundLbl.Location = new System.Drawing.Point(12, 104);
+            boundLbl.Name = "boundLbl";
+            boundLbl.Size = new System.Drawing.Size(237, 15);
+            boundLbl.TabIndex = 6;
+            boundLbl.Text = "Bound to: None";
+            boundLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AutomaticModeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 128);
-            this.Controls.Add(this.boundLbl);
-            this.Controls.Add(this.refreshBtn);
-            this.Controls.Add(this.unboundBtn);
-            this.Controls.Add(this.boundBtn);
-            this.Controls.Add(this.processListComboBox);
-            this.Controls.Add(this.processListLbl);
-            this.Controls.Add(this.toolStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "AutomaticModeForm";
-            this.Text = "Mouse Bounder";
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(264, 128);
+            Controls.Add(boundLbl);
+            Controls.Add(refreshBtn);
+            Controls.Add(unboundBtn);
+            Controls.Add(boundBtn);
+            Controls.Add(processListComboBox);
+            Controls.Add(processListLbl);
+            Controls.Add(toolStrip1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "AutomaticModeForm";
+            Text = "Mouse Bounder";
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
