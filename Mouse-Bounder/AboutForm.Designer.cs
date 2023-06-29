@@ -53,7 +53,7 @@
             versionLbl.Name = "versionLbl";
             versionLbl.Size = new System.Drawing.Size(118, 25);
             versionLbl.TabIndex = 0;
-            versionLbl.Text = "Version 2.1.0";
+            versionLbl.Text = "Version 2.2.0";
             // 
             // label3
             // 

@@ -36,6 +36,7 @@
             rememberPreviousProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             autoBindToRememberedProcessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             resetToDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            boundTypeMouseEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             helpBtn = new System.Windows.Forms.ToolStripButton();
             aboutBtn = new System.Windows.Forms.ToolStripButton();
             processListLbl = new System.Windows.Forms.Label();
@@ -60,7 +61,7 @@
             // toolStripDropDownButton1
             // 
             toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { alwaysOnTopToolStripMenuItem, onlyBindWhenAppIsFocusedToolStripMenuItem, rememberPreviousProcessesToolStripMenuItem, autoBindToRememberedProcessesToolStripMenuItem, resetToDefaultToolStripMenuItem });
+            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { alwaysOnTopToolStripMenuItem, onlyBindWhenAppIsFocusedToolStripMenuItem, rememberPreviousProcessesToolStripMenuItem, autoBindToRememberedProcessesToolStripMenuItem, resetToDefaultToolStripMenuItem, boundTypeMouseEventToolStripMenuItem });
             toolStripDropDownButton1.Image = (System.Drawing.Image)resources.GetObject("toolStripDropDownButton1.Image");
             toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -101,6 +102,13 @@
             resetToDefaultToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             resetToDefaultToolStripMenuItem.Text = "Reset to Default";
             resetToDefaultToolStripMenuItem.Click += resetToDefaultToolStripMenuItem_Click;
+            // 
+            // boundTypeMouseEventToolStripMenuItem
+            // 
+            boundTypeMouseEventToolStripMenuItem.Name = "boundTypeMouseEventToolStripMenuItem";
+            boundTypeMouseEventToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            boundTypeMouseEventToolStripMenuItem.Text = "Bound Trigger: Mouse Event";
+            boundTypeMouseEventToolStripMenuItem.Click += boundTypeMouseEventToolStripMenuItem_Click;
             // 
             // helpBtn
             // 
@@ -220,5 +228,6 @@
         private System.Windows.Forms.ToolStripButton helpBtn;
         private System.Windows.Forms.ToolStripButton aboutBtn;
         private System.Windows.Forms.ToolStripMenuItem resetToDefaultToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem boundTypeMouseEventToolStripMenuItem;
     }
 }

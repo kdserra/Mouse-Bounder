@@ -6,10 +6,22 @@ The noted changes will be purely package related changes between releases, and d
 
 ## [Unreleased]
 
+## [2.2.0] - 2023-06-29
+
+### Added
+
+- Added Configurable Bound Type (Trigger Bound Update On: Mouse Event, Polling (every tick), Both (Default))
+
 ### Updated
 
-- Updated "Only Bound When Focused" to pause on minimize.
+- Updated default bound type from Mouse Event (implied prior) to Both
+- Updated "Only Bound When Focused" to pause on minimize
 - Updated bound status text to indicate paused state
+
+### Fixed
+
+- Fixed performance issue when dealing with lots of Mouse Events
+- Fixed bug with Mouse Move Event not getting unsubscribed from
 
 ### Removed
 

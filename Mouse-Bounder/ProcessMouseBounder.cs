@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,7 +28,9 @@ namespace Mouse_Bounder
         public static event BoundRegainedFocusHandler OnBoundRegainedFocus;
 
         public const bool DEFAULT_BOUND_WHEN_FOCUSED = false;
+        public const int DEFAULT_BOUND_TYPE = (int)BoundType.Both;
         public static bool BoundWhenFocused = false;
+        public static BoundType BoundType = (BoundType)DEFAULT_BOUND_TYPE;
 
         private static IKeyboardMouseEvents m_GlobalHook;
         private static BoundMode m_CurrentBoundMode = BoundMode.None;
@@ -42,11 +46,13 @@ namespace Mouse_Bounder
         public static void ResetToDefault()
         {
             BoundWhenFocused = DEFAULT_BOUND_WHEN_FOCUSED;
+            BoundType = (BoundType)DEFAULT_BOUND_TYPE;
         }
 
         public static void LoadSettings()
         {
             BoundWhenFocused = Settings.Default.BoundWhenFocused;
+            BoundType = (BoundType)Settings.Default.BoundType;
         }
 
         public static void Bound(Process process)
@@ -141,6 +147,11 @@ namespace Mouse_Bounder
 
         private static bool TryBound(Point mousePosition)
         {
+            if (m_BoundRect.Contains(mousePosition))
+            {
+                return false;
+            }
+
             switch (m_CurrentBoundMode)
             {
                 case BoundMode.Process:
@@ -186,16 +197,11 @@ namespace Mouse_Bounder
                     return false;
             }
 
-            if (m_BoundRect.Contains(mousePosition))
-            {
-                return false;
-            }
-
             Cursor.Position = m_BoundRect.Bound(mousePosition);
             return true;
         }
 
-        private static void OnMouseMoveEventHook(object sender, MouseEventExtArgs e)
+        private static void OnMouseEvent(object sender, MouseEventExtArgs e)
         {
             bool handled = TryBound(e.Location);
             e.Handled = handled;
@@ -212,15 +218,24 @@ namespace Mouse_Bounder
         private static void Subscribe()
         {
             m_GlobalHook = Hook.GlobalEvents();
-            m_GlobalHook.MouseMoveExt += OnMouseMoveEventHook;
             m_CancellationTokenSource = new CancellationTokenSource();
-            new Thread(() => { MouseBounderThreadWorker(m_CancellationTokenSource.Token); }).Start();
+
+            if (BoundType == BoundType.MouseEvent || BoundType == BoundType.Both)
+            {
+                m_GlobalHook.MouseMoveExt += OnMouseEvent;
+            }
+
+            if (BoundType == BoundType.Polling || BoundType == BoundType.Both)
+            {
+                new Thread(() => { MouseBounderThreadWorker(m_CancellationTokenSource.Token); }).Start();
+            }
+
             m_IsSubscribed = true;
         }
 
         private static void Unsubscribe()
         {
-            m_GlobalHook.MouseMoveExt -= OnMouseMoveEventHook;
+            m_GlobalHook.MouseMoveExt -= OnMouseEvent;
             m_CancellationTokenSource.Cancel();
             m_CancellationTokenSource.Dispose();
             m_GlobalHook.Dispose();

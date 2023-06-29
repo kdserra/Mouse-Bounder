@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Runtime;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using System.Text;
 
 namespace Mouse_Bounder
 {
-    public class Utilities
+    public static class Utilities
     {
         private const int SW_SHOW = 5;
         private const int SW_RESTORE = 9;
@@ -168,6 +172,26 @@ namespace Mouse_Bounder
         public static bool IsMinimized(Process process)
         {
             return IsIconic(process.MainWindowHandle);
+        }
+
+        public static string AddSpacesBeforeCapitalLetters(string input, bool skipFirst = false)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                char c = input[i];
+
+                if (Char.IsUpper(c) && (i > 0 || !skipFirst))
+                {
+                    sb.Append($" {c}");
+                    continue;
+                }
+
+                sb.Append(c);
+            }
+
+            return sb.ToString();
         }
     }
 }

@@ -82,5 +82,17 @@ namespace Mouse_Bounder {
                 this["PreviousProcessName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int BoundType {
+            get {
+                return ((int)(this["BoundType"]));
+            }
+            set {
+                this["BoundType"] = value;
+            }
+        }
     }
 }

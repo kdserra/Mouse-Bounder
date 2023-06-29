@@ -48,6 +48,7 @@ namespace Mouse_Bounder
             onlyBindWhenAppIsFocusedToolStripMenuItem.Checked = ProcessMouseBounder.DEFAULT_BOUND_WHEN_FOCUSED;
             rememberPreviousProcessesToolStripMenuItem.Checked = DEFAULT_REMEMBER_PREVIOUS_PROCESSES;
             autoBindToRememberedProcessesToolStripMenuItem.Checked = DEFAULT_AUTO_BIND_TO_REMEMBERED_PROCESSES;
+            boundTypeMouseEventToolStripMenuItem.Text = GetBoundTriggerText();
             processListComboBox.Text = DEFAULT_PROCESS_NAME;
             SaveSettings();
         }
@@ -60,6 +61,7 @@ namespace Mouse_Bounder
             onlyBindWhenAppIsFocusedToolStripMenuItem.Checked = Settings.Default.BoundWhenFocused;
             rememberPreviousProcessesToolStripMenuItem.Checked = Settings.Default.RememberPreviousProcesses;
             autoBindToRememberedProcessesToolStripMenuItem.Checked = Settings.Default.AutoBindToRememberedProcesses;
+            boundTypeMouseEventToolStripMenuItem.Text = GetBoundTriggerText();
             if (Settings.Default.RememberPreviousProcesses) { processListComboBox.Text = Settings.Default.PreviousProcessName; }
         }
 
@@ -70,6 +72,7 @@ namespace Mouse_Bounder
             Settings.Default.RememberPreviousProcesses = rememberPreviousProcessesToolStripMenuItem.Checked;
             Settings.Default.AutoBindToRememberedProcesses = autoBindToRememberedProcessesToolStripMenuItem.Checked;
             Settings.Default.PreviousProcessName = processListComboBox.Text;
+            Settings.Default.BoundType = (int)ProcessMouseBounder.BoundType;
             Settings.Default.Save();
         }
 
@@ -246,6 +249,32 @@ namespace Mouse_Bounder
         private void resetToDefaultToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ResetToDefault();
+        }
+
+        private void boundTypeMouseEventToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BoundType originalBoundType = ProcessMouseBounder.BoundType;
+
+            switch (originalBoundType)
+            {
+                case BoundType.MouseEvent:
+                    ProcessMouseBounder.BoundType = BoundType.Polling;
+                    break;
+                case BoundType.Polling:
+                    ProcessMouseBounder.BoundType = BoundType.Both;
+                    break;
+                case BoundType.Both:
+                    ProcessMouseBounder.BoundType = BoundType.MouseEvent;
+                    break;
+            }
+
+            boundTypeMouseEventToolStripMenuItem.Text = GetBoundTriggerText();
+            SaveSettings();
+        }
+
+        private string GetBoundTriggerText()
+        {
+            return $"Bound Type: {Utilities.AddSpacesBeforeCapitalLetters(ProcessMouseBounder.BoundType.ToString(), true)}";
         }
 
 
