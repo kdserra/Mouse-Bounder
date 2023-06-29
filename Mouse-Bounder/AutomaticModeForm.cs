@@ -78,7 +78,7 @@ namespace Mouse_Bounder
 
             if (process != null)
             {
-                boundLbl.Text = $"Bound to: {process.ProcessName}";
+                boundLbl.SafeInvoke(() => { boundLbl.Text = $"Bound to: {process.ProcessName}"; });
             }
             else
             {
@@ -94,7 +94,7 @@ namespace Mouse_Bounder
 
         private void OnUnbound()
         {
-            boundLbl.Text = "Bound to: None";
+            boundLbl.SafeInvoke(() => { boundLbl.Text = "Bound to: None"; });
             toolStrip1.Enabled = true;
             processListComboBox.Enabled = true;
             boundBtn.Enabled = true;
@@ -111,7 +111,7 @@ namespace Mouse_Bounder
                 return;
             }
 
-            boundLbl.Text = $"Bound to: {process.ProcessName}";
+            boundLbl.SafeInvoke(() => { boundLbl.Text = $"Bound to: {process.ProcessName}"; });
         }
 
         private void OnBoundLostFocus()
@@ -124,7 +124,7 @@ namespace Mouse_Bounder
                 return;
             }
 
-            boundLbl.Text = $"Bound to: {process.ProcessName} [Paused]";
+            boundLbl.SafeInvoke(() => { boundLbl.Text = $"Bound to: {process.ProcessName} [Paused]"; });
         }
 
         private Process GetProcessFromProcessName(string processName)
