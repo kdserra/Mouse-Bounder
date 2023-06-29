@@ -197,11 +197,8 @@ namespace Mouse_Bounder
 
         private static void OnMouseMoveEventHook(object sender, MouseEventExtArgs e)
         {
-            /*
             bool handled = TryBound(e.Location);
             e.Handled = handled;
-            */
-            e.Handled = false;
         }
 
         private static void MouseBounderThreadWorker(CancellationToken cancellationToken)
