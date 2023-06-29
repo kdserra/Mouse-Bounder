@@ -8,7 +8,7 @@
   Restrict the mouse to the bounds of a Windows application.
 </p>
 
-# Usage
+## Usage
 
 1. Open Mouse Bounder
 2. Open the Process List
@@ -19,11 +19,11 @@
 
 The refresh button will update the process list.
 
-# Download
+## Download
 
 Head to the [Releases](https://github.com/kdserra/Mouse-Bounder/releases).
 
-# Build Information
+## Build Information
 
 C# Windows Form Application
 
