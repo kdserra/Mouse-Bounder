@@ -176,7 +176,8 @@ If your on a 64 bit PC use x64, if your on 32 bit use x86.
 
 Initial release
 
-[Unreleased]: https://github.com/kdserra/Mouse-Bounder/compare/v2.1.0...dev
+[Unreleased]: https://github.com/kdserra/Mouse-Bounder/compare/v2.2.0...dev
+[2.2.0]: https://github.com/kdserra/Mouse-Bounder/releases/tag/v2.2.0
 [2.1.0]: https://github.com/kdserra/Mouse-Bounder/releases/tag/v2.1.0
 [2.0.0]: https://github.com/kdserra/Mouse-Bounder/releases/tag/v2.0.0
 [1.2.2]: https://github.com/kdserra/Mouse-Bounder/releases/tag/v1.2.2
