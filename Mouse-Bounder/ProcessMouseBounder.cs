@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsHook;
 
@@ -32,6 +34,9 @@ namespace Mouse_Bounder
         private static Rect m_BoundRect;
         private static bool m_IsSubscribed = false;
         private static bool m_WaitingToRegainFocus = false;
+        private static CancellationTokenSource m_CancellationTokenSource = new CancellationTokenSource();
+
+
         public static bool IsBound { get; private set; } = false;
 
         public static void ResetToDefault()
@@ -134,7 +139,7 @@ namespace Mouse_Bounder
             }
         }
 
-        private static void GlobalHookMouseMoveExt(object sender, WindowsHook.MouseEventExtArgs e)
+        private static bool TryBound(Point mousePosition)
         {
             switch (m_CurrentBoundMode)
             {
@@ -142,19 +147,19 @@ namespace Mouse_Bounder
                     if (SelectedBoundProcess == null)
                     {
                         Unbound();
-                        return;
+                        return false;
                     }
 
                     if (SelectedBoundProcess.HasExited)
                     {
                         Unbound();
-                        return;
+                        return false;
                     }
 
                     if (!BoundWhenFocused && Utilities.IsMinimized(SelectedBoundProcess))
                     {
                         Unbound();
-                        return;
+                        return false;
                     }
 
                     bool isFocused = Utilities.IsProcessFocused(SelectedBoundProcess);
@@ -162,7 +167,7 @@ namespace Mouse_Bounder
 
                     if (BoundWhenFocused && !isFocused)
                     {
-                        return;
+                        return false;
                     }
 
                     Rect? windowRect = Utilities.GetAdjustedWindowRect(SelectedBoundProcess);
@@ -170,7 +175,7 @@ namespace Mouse_Bounder
                     if (windowRect == null)
                     {
                         Unbound();
-                        return;
+                        return false;
                     }
 
                     m_BoundRect = (Rect)windowRect;
@@ -178,28 +183,49 @@ namespace Mouse_Bounder
                 case BoundMode.Rect:
                     break;
                 default:
-                    return;
+                    return false;
             }
 
-            if (m_BoundRect.Contains(e.Location))
+            if (m_BoundRect.Contains(mousePosition))
             {
-                return;
+                return false;
             }
 
-            Cursor.Position = m_BoundRect.Bound(e.Location);
-            e.Handled = true;
+            Cursor.Position = m_BoundRect.Bound(mousePosition);
+            return true;
+        }
+
+        private static void OnMouseMoveEventHook(object sender, MouseEventExtArgs e)
+        {
+            /*
+            bool handled = TryBound(e.Location);
+            e.Handled = handled;
+            */
+            e.Handled = false;
+        }
+
+        private static void MouseBounderThreadWorker(CancellationToken cancellationToken)
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                TryBound(Cursor.Position);
+            }
         }
 
         private static void Subscribe()
         {
             m_GlobalHook = Hook.GlobalEvents();
-            m_GlobalHook.MouseMoveExt += GlobalHookMouseMoveExt;
+            m_GlobalHook.MouseMoveExt += OnMouseMoveEventHook;
+            m_CancellationTokenSource = new CancellationTokenSource();
+            new Thread(() => { MouseBounderThreadWorker(m_CancellationTokenSource.Token); }).Start();
             m_IsSubscribed = true;
         }
 
         private static void Unsubscribe()
         {
-            m_GlobalHook.MouseMoveExt += GlobalHookMouseMoveExt;
+            m_GlobalHook.MouseMoveExt -= OnMouseMoveEventHook;
+            m_CancellationTokenSource.Cancel();
+            m_CancellationTokenSource.Dispose();
             m_GlobalHook.Dispose();
             m_IsSubscribed = false;
         }
