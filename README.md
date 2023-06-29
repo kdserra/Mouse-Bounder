@@ -31,3 +31,15 @@ Target Framework
 .NET 7
 
 Built using Visual Studio 2022
+
+### Publish
+
+To produce the final binaries run `publish.bat`
+
+The final binary will be located in:
+```.\Mouse-Bounder\Mouse-Bounder\bin\Release\net7.0-windows\<RID>\publish\```
+
+Where `<RID>` is the [runtime identifier](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog):
+- win-x64
+- win-x86
+- win-arm64
