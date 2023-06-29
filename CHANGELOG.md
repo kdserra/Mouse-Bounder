@@ -142,7 +142,6 @@ To update, simply download the executable, extract it to a folder, and run `Mous
 
 - Fixed bug with bounding to an application while bounded.
 
-
 ## [1.0.2] - 2022-01-16
 
 If your on a 64 bit PC use x64, if your on 32 bit use x86.
