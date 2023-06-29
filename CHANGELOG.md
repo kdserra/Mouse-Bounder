@@ -6,6 +6,10 @@ The noted changes will be purely package related changes between releases, and d
 
 ## [Unreleased]
 
+### Added
+
+- Added Switch to Process on Bound
+
 ## [2.0.0] - 2022-04-25
 
 ### Added

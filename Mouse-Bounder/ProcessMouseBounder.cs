@@ -48,6 +48,7 @@ namespace Mouse_Bounder
         {
             if (process == null) { return; }
             SelectedBoundProcess = process;
+            Utilities.SwitchToProcess(process);
             Utilities.FocusProcess(process);
             if (IsBound) { Unbound(); }
             Rect? boundRect = Utilities.GetAdjustedWindowRect(process);

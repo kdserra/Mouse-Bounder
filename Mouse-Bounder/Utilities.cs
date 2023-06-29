@@ -6,6 +6,8 @@ namespace Mouse_Bounder
 {
     public class Utilities
     {
+        private const int SW_SHOW = 5;
+        private const int SW_RESTORE = 9;
         private static readonly Rect m_BorderRectFrame = new Rect(-7, 0, 7, 7);
         
         [StructLayout(LayoutKind.Sequential)]
@@ -16,6 +18,9 @@ namespace Mouse_Bounder
             public int right;
             public int bottom;
         }
+
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr FindWindow(string strClassName, string strWindowName);
@@ -96,6 +101,23 @@ namespace Mouse_Bounder
             Process focusedProcess;
             if (!GetCurrentFocusedProcess(out focusedProcess)) { return false; }
             return (focusedProcess.Id == process.Id);
+        }
+
+        /// <summary>
+        /// Switches to the main window of the specified process, restoring it if minimized and bringing it to the foreground.
+        /// </summary>
+        public static void SwitchToProcess(Process process)
+        {
+            IntPtr mainWindowHandle = process.MainWindowHandle;
+
+            if (mainWindowHandle == IntPtr.Zero)
+            {
+                return;
+            }
+
+            ShowWindow(mainWindowHandle, SW_SHOW);
+            ShowWindow(mainWindowHandle, SW_RESTORE);
+            SetForegroundWindow(mainWindowHandle);
         }
 
         /// <summary>
