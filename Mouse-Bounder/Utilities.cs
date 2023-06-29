@@ -46,11 +46,20 @@ namespace Mouse_Bounder
         /// </summary>
         public static Rect? GetWindowRect(Process process)
         {
-            if (process == null) { return null; }
+            if (process == null)
+            {
+                return null;
+            }
+
             RECT rect = new RECT();
             IntPtr hwnd = FindWindow(null, process.MainWindowTitle);
             bool state = GetWindowRect(hwnd, ref rect);
-            if (!state) { return null; }
+
+            if (!state)
+            {
+                return null;
+            }
+
             return new Rect(rect.left, rect.top, rect.right, rect.bottom);
         }
 
@@ -60,14 +69,24 @@ namespace Mouse_Bounder
         /// </summary>
         public static Rect? GetAdjustedWindowRect(Process process)
         {
-            if (process == null) { return null; }
+            if (process == null)
+            {
+                return null;
+            }
+
             RECT rect = new RECT();
             bool state = GetWindowRect(process.MainWindowHandle, ref rect);
-            if (!state) { return null; }
-            return new Rect(rect.left   - m_BorderRectFrame.Left,
-                            rect.top    - m_BorderRectFrame.Top,
-                            rect.right  - m_BorderRectFrame.Right,
-                            rect.bottom - m_BorderRectFrame.Bottom);
+
+            if (!state)
+            {
+                return null;
+            }
+
+            return new Rect(
+                rect.left   - m_BorderRectFrame.Left,
+                rect.top    - m_BorderRectFrame.Top,
+                rect.right  - m_BorderRectFrame.Right,
+                rect.bottom - m_BorderRectFrame.Bottom);
         }
 
         /// <summary>
@@ -77,17 +96,27 @@ namespace Mouse_Bounder
         private static bool GetCurrentFocusedProcess(out Process focusedProcess)
         {
             IntPtr hwnd = GetForegroundWindow();
-            if (hwnd == IntPtr.Zero) { focusedProcess = null; return false; }
+
+            if (hwnd == IntPtr.Zero)
+            {
+                focusedProcess = null;
+                return false;
+            }
+
             uint processID;
             GetWindowThreadProcessId(hwnd, out processID);
+
             foreach (Process process in Process.GetProcesses())
             {
-                if (process.Id == processID)
+                if (process.Id != processID)
                 {
-                    focusedProcess = process;
-                    return true;
+                    continue;
                 }
+
+                focusedProcess = process;
+                return true;
             }
+
             focusedProcess = null;
             return false;
         }
@@ -99,7 +128,12 @@ namespace Mouse_Bounder
         public static bool IsProcessFocused(Process process)
         {
             Process focusedProcess;
-            if (!GetCurrentFocusedProcess(out focusedProcess)) { return false; }
+
+            if (!GetCurrentFocusedProcess(out focusedProcess))
+            {
+                return false;
+            }
+
             return (focusedProcess.Id == process.Id);
         }
 

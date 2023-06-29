@@ -8,8 +8,15 @@ namespace Mouse_Bounder
     {
         public static bool OpenLink(string link)
         {
-            try { Process.Start(new ProcessStartInfo(link) { UseShellExecute = true }); return true; }
-            catch { return false; }
+            try
+            {
+                Process.Start(new ProcessStartInfo(link) { UseShellExecute = true });
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public AboutForm()

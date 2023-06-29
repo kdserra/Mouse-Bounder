@@ -46,13 +46,28 @@ namespace Mouse_Bounder
 
         public static void Bound(Process process)
         {
-            if (process == null) { return; }
+            if (process == null)
+            {
+                return;
+            }
+
             SelectedBoundProcess = process;
             Utilities.SwitchToProcess(process);
             Utilities.FocusProcess(process);
-            if (IsBound) { Unbound(); }
+
+            if (IsBound)
+            {
+                Unbound();
+            }
+
             Rect? boundRect = Utilities.GetAdjustedWindowRect(process);
-            if (boundRect == null) { Unbound(); return; }
+
+            if (boundRect == null)
+            {
+                Unbound();
+                return;
+            }
+
             m_BoundRect = (Rect)boundRect;
             Subscribe();
             IsBound = true;
@@ -63,7 +78,11 @@ namespace Mouse_Bounder
 
         public static void Bound(Rect rect)
         {
-            if (IsBound) { Unbound(); }
+            if (IsBound)
+            {
+                Unbound();
+            }
+
             m_BoundRect = rect;
             Subscribe();
             IsBound = true;
@@ -74,8 +93,16 @@ namespace Mouse_Bounder
 
         public static void Unbound()
         {
-            if (!IsBound) { return; }
-            if (m_IsSubscribed) { Unsubscribe(); }
+            if (!IsBound)
+            {
+                return;
+            }
+
+            if (m_IsSubscribed)
+            {
+                Unsubscribe();
+            }
+
             SelectedBoundProcess = null;
             m_WaitingToRegainFocus = false;
             m_BoundRect = new Rect(0, 0, 0, 0);

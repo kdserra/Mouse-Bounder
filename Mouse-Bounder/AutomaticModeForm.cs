@@ -29,7 +29,12 @@ namespace Mouse_Bounder
             {
                 string selection = processListComboBox.Text;
                 Process process = GetProcessFromProcessName(selection);
-                if (process == null) { return; }
+
+                if (process == null)
+                {
+                    return;
+                }
+
                 ProcessMouseBounder.Bound(process);
             }
         }
@@ -72,8 +77,16 @@ namespace Mouse_Bounder
             Debug.WriteLine("OnBound");
             this.Text = "Mouse Bounder [Bound]";
             Process process = ProcessMouseBounder.SelectedBoundProcess;
-            if (process != null) { boundLbl.Text = $"Bound to: {process.ProcessName}"; }
-            else { boundLbl.Text = "Bound to: (null)"; }
+
+            if (process != null)
+            {
+                boundLbl.Text = $"Bound to: {process.ProcessName}";
+            }
+            else
+            {
+                boundLbl.Text = "Bound to: (null)";
+            }
+
             toolStrip1.Enabled = false;
             processListComboBox.Enabled = false;
             boundBtn.Enabled = false;
@@ -103,9 +116,14 @@ namespace Mouse_Bounder
         private Process GetProcessFromProcessName(string processName)
         {
             Process[] processes = Process.GetProcesses();
+
             foreach (Process process in processes)
             {
-                if (process.ProcessName != processName) { continue; }
+                if (process.ProcessName != processName)
+                {
+                    continue;
+                }
+
                 return process;
             }
             return null;
@@ -115,6 +133,7 @@ namespace Mouse_Bounder
         {
             Process[] processes = Process.GetProcesses();
             processListComboBox.Items.Clear();
+
             foreach (Process process in processes)
             {
                 if (!String.IsNullOrEmpty(process.MainWindowTitle))
@@ -122,6 +141,7 @@ namespace Mouse_Bounder
                     processListComboBox.Items.Add(process.ProcessName);
                 }
             }
+
             processListComboBox.SelectedIndex = 0;
         }
 
@@ -129,7 +149,12 @@ namespace Mouse_Bounder
         {
             string selection = processListComboBox.Text;
             Process process = GetProcessFromProcessName(selection);
-            if (process == null) { return; }
+
+            if (process == null)
+            {
+                return;
+            }
+
             ProcessMouseBounder.Bound(process);
             SaveSettings();
         }
@@ -138,7 +163,11 @@ namespace Mouse_Bounder
         {
             string selection = processListComboBox.Text;
             Process process = GetProcessFromProcessName(selection);
-            if (process == null) { return; }
+
+            if (process == null)
+            {
+                return;
+            }
             ProcessMouseBounder.Unbound();
         }
 
@@ -146,7 +175,7 @@ namespace Mouse_Bounder
         {
             UpdateProcessComboBox();
         }
-        
+
         private void helpBtn_Click(object sender, EventArgs e)
         {
             HelpForm form = new HelpForm();

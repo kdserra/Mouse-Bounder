@@ -67,11 +67,29 @@ namespace Mouse_Bounder
 
         public Point Bound(Point position)
         {
-            if (Contains(position)) { return position; }
-            if (position.X < Left) { position = new Point(Left, position.Y); }
-            else if (position.X > Right) { position = new Point(Right, position.Y); }
-            if (position.Y < Top) { position = new Point(position.X, Top); }
-            else if (position.Y > Bottom) { position = new Point(position.X, Bottom); }
+            if (Contains(position))
+            {
+                return position;
+            }
+
+            if (position.X < Left)
+            {
+                position = new Point(Left, position.Y);
+            }
+            else if (position.X > Right)
+            {
+                position = new Point(Right, position.Y);
+            }
+
+            if (position.Y < Top)
+            {
+                position = new Point(position.X, Top);
+            }
+            else if (position.Y > Bottom)
+            {
+                position = new Point(position.X, Bottom);
+            }
+
             return position;
         }
     }
