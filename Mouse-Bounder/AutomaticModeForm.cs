@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using System.Configuration;
 
 namespace Mouse_Bounder
 {
@@ -48,7 +47,7 @@ namespace Mouse_Bounder
             onlyBindWhenAppIsFocusedToolStripMenuItem.Checked = ProcessMouseBounder.DEFAULT_BOUND_WHEN_FOCUSED;
             rememberPreviousProcessesToolStripMenuItem.Checked = DEFAULT_REMEMBER_PREVIOUS_PROCESSES;
             autoBindToRememberedProcessesToolStripMenuItem.Checked = DEFAULT_AUTO_BIND_TO_REMEMBERED_PROCESSES;
-            boundTypeMouseEventToolStripMenuItem.Text = GetBoundTriggerText();
+            boundTypeMouseEventToolStripMenuItem.Text = GetBoundTypeText();
             processListComboBox.Text = DEFAULT_PROCESS_NAME;
             SaveSettings();
         }
@@ -61,7 +60,7 @@ namespace Mouse_Bounder
             onlyBindWhenAppIsFocusedToolStripMenuItem.Checked = Settings.Default.BoundWhenFocused;
             rememberPreviousProcessesToolStripMenuItem.Checked = Settings.Default.RememberPreviousProcesses;
             autoBindToRememberedProcessesToolStripMenuItem.Checked = Settings.Default.AutoBindToRememberedProcesses;
-            boundTypeMouseEventToolStripMenuItem.Text = GetBoundTriggerText();
+            boundTypeMouseEventToolStripMenuItem.Text = GetBoundTypeText();
             if (Settings.Default.RememberPreviousProcesses) { processListComboBox.Text = Settings.Default.PreviousProcessName; }
         }
 
@@ -222,15 +221,21 @@ namespace Mouse_Bounder
 
         private void alwaysOnTopToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            alwaysOnTopToolStripMenuItem.Checked = !alwaysOnTopToolStripMenuItem.Checked;
-            this.TopMost = alwaysOnTopToolStripMenuItem.Checked;
+            SafeInvoke(() =>
+            {
+                alwaysOnTopToolStripMenuItem.Checked = !alwaysOnTopToolStripMenuItem.Checked;
+                this.TopMost = alwaysOnTopToolStripMenuItem.Checked;
+            });
             SaveSettings();
         }
 
         private void onlyBindWhenAppIsFocusedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            onlyBindWhenAppIsFocusedToolStripMenuItem.Checked = !onlyBindWhenAppIsFocusedToolStripMenuItem.Checked;
-            ProcessMouseBounder.BoundWhenFocused = onlyBindWhenAppIsFocusedToolStripMenuItem.Checked;
+            SafeInvoke(() =>
+            {
+                onlyBindWhenAppIsFocusedToolStripMenuItem.Checked = !onlyBindWhenAppIsFocusedToolStripMenuItem.Checked;
+                ProcessMouseBounder.BoundWhenFocused = onlyBindWhenAppIsFocusedToolStripMenuItem.Checked;
+            });
             SaveSettings();
         }
 
@@ -268,13 +273,14 @@ namespace Mouse_Bounder
                     break;
             }
 
-            boundTypeMouseEventToolStripMenuItem.Text = GetBoundTriggerText();
+            boundTypeMouseEventToolStripMenuItem.Text = GetBoundTypeText();
             SaveSettings();
         }
 
-        private string GetBoundTriggerText()
+        private string GetBoundTypeText()
         {
-            return $"Bound Type: {Utilities.AddSpacesBeforeCapitalLetters(ProcessMouseBounder.BoundType.ToString(), true)}";
+            string formattedBoundType = Utilities.AddSpacesBeforeCapitalLetters(ProcessMouseBounder.BoundType.ToString(), true);
+            return $"Bound Type: {formattedBoundType}";
         }
 
 
