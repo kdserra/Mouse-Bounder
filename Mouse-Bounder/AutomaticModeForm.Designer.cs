@@ -61,7 +61,7 @@
             // toolStripDropDownButton1
             // 
             toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { alwaysOnTopToolStripMenuItem, onlyBindWhenAppIsFocusedToolStripMenuItem, rememberPreviousProcessesToolStripMenuItem, autoBindToRememberedProcessesToolStripMenuItem, resetToDefaultToolStripMenuItem, boundTypeMouseEventToolStripMenuItem });
+            toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { alwaysOnTopToolStripMenuItem, onlyBindWhenAppIsFocusedToolStripMenuItem, rememberPreviousProcessesToolStripMenuItem, autoBindToRememberedProcessesToolStripMenuItem, boundTypeMouseEventToolStripMenuItem, resetToDefaultToolStripMenuItem });
             toolStripDropDownButton1.Image = (System.Drawing.Image)resources.GetObject("toolStripDropDownButton1.Image");
             toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             toolStripDropDownButton1.Name = "toolStripDropDownButton1";

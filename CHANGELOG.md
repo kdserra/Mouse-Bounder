@@ -6,6 +6,10 @@ The noted changes will be purely package related changes between releases, and d
 
 ## [Unreleased]
 
+### Updated
+
+- Updated bound type menu item position
+
 ## [2.2.0] - 2023-06-29
 
 ### Added
